@@ -68,14 +68,14 @@ char *p_build(char *val, char *tok)
 }
 
 /**
- * _search_cmd - function to search in path 
+ * _search_cmd - function to search in path
  * @c: the character to be checked
  * Return: the result.
  */
 
 int _search_cmd(char **c)
 {
-	struct st bf;
+	struct stat bf;
 	char *ph, *vl, *c_ph;
 
 	ph = _envget("PATH");

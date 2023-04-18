@@ -54,4 +54,10 @@ char *_envget(char *str);
 char *p_build(char *val, char *tok);
 int _search_cmd(char **c);
 
+int bul_echo(int str, char **cm);
+int env_display(__attribute__((unused)) int last, __attribute__((unused)) char **cmm);
+int dis_env_help(__attribute__((unused)) int last, char **cmm);
+int dir_change(__attribute__((unused)) int last, char **cmd);
+void built_exit(int s, char **cmd, char *input, char **argv);
+
 #endif
