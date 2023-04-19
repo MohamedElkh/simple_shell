@@ -59,5 +59,25 @@ int env_display(__attribute__((unused)) int last, __attribute__((unused)) char *
 int dis_env_help(__attribute__((unused)) int last, char **cmm);
 int dir_change(__attribute__((unused)) int last, char **cmd);
 void built_exit(int s, char **cmd, char *input, char **argv);
+int echo_print(char **cm);
+int display_history(__attribute__((unused))char **cc, __attribute__((unused))int ss);
+void enviro_free(char **en);
+int fun_history(char *inp);
+
+void f_signal_handel(int n);
+int func_cmd_check(int n, char *inp, char **cmd, char **argv);
+int f_handle_built(int last, char **cmd);
+
+/**
+ * struct built - built to handle and excute
+ * @str: the pointer to char
+ * f: function to excute 
+ */
+
+typedef struct built
+{
+	char *str;
+	int (*f)(char **li, int err);
+} b_t;
 
 #endif
