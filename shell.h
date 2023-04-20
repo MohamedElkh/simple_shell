@@ -68,6 +68,12 @@ void f_signal_handel(int n);
 int func_cmd_check(int n, char *inp, char **cmd, char **argv);
 int f_handle_built(int last, char **cmd);
 
+void c_arr_envi(char **env);
+void exit_shell(char *li, char **cmd, FILE *file);
+int func_built_check(char **cm);
+void check_t_file(int count, char *li, char **argv, FILE *file);
+void func_file_read(char *name, char **argv);
+
 /**
  * struct built - built to handle and excute
  * @str: the pointer to char
