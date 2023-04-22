@@ -56,7 +56,7 @@ char *_takeline()
 		}
 		if (x >= bfsize)
 		{
-			bf = realloc(bf, bfsize, bfsize + 1);
+			bf = fre_locate(bf, bfsize, bfsize + 1);
 			if (bf == NULL)
 			{
 				return (NULL);

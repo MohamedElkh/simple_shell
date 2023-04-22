@@ -51,7 +51,7 @@ int func_cmd_check(int n, char *inp, char **cmd, char **argv)
 		}
 		if (execve(*cmd, cmd, environment) == -1)
 		{
-			display_error(cmd[0], n, argv);
+			display_error(n, cmd[0], argv);
 			free(inp);
 			free(cmd);
 			exit(EXIT_FAILURE);
@@ -88,7 +88,7 @@ int f_handle_built(int last, char **cmd)
 	{
 		if (_comparestr(cmd[0], (p + x)->str) == 0)
 		{
-			return ((p + x)->f(cmd, last));
+			return ((p + x)->f(last, cmd));
 		}
 		x++;
 	}

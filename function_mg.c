@@ -114,7 +114,7 @@ void *fre_locate(void *p, size_t oldvalue, size_t newvalue)
 		return (NULL);
 	if (p == NULL)
 	{
-		arr_filled(res, '\0', newvalue);
+		arr_filled('\0', newvalue, res);
 		free(p);
 	}
 	else

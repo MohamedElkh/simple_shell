@@ -107,7 +107,7 @@ int dir_change(__attribute__((unused)) int last, char **cmd)
 
 	if (cmd[1] == NULL)
 	{
-		val = chdir(getenv("HOME");
+		val = chdir(getenv("HOME"));
 	}
 	else if (_comparestr(cmd[1], "-") == 0)
 	{
@@ -158,7 +158,7 @@ void built_exit(int s, char **cmd, char *input, char **argv)
 	{
 		if (_charaisa(cmd[1][x++]) != 0)
 		{
-			prin_error(argv, s, cmd);
+			prin_error(s, cmd, argv);
 			break;
 		}
 		else

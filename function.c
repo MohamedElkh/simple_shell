@@ -36,7 +36,7 @@ void p_num(int num)
 	}
 	if ((i / 10) > 0)
 	{
-		p_number(x / 10);
+		p_number(i / 10);
 	}
 	_putchar(i % 10 + '0');
 }

@@ -41,7 +41,7 @@ int echo_print(char **cm)
  * Return: the result.
  */
 
-int display_history(__attribute__((unused))char **cc, __attribute__((unused))int ss)
+int display_history(__attribute__((unused))int ss, __attribute__((unused))char **cc)
 {
 	char *flname = ".simple_shell_history";
 	size_t le = 0;
@@ -56,7 +56,7 @@ int display_history(__attribute__((unused))char **cc, __attribute__((unused))int
 		return (-1);
 	}
 	
-	while ((_takeline(&lin, &le, fl)) != -1)
+	while (-1 != (_takeline(&lin, &le, fl)))
 	{
 		count++;
 		err = p_itoa(count);
@@ -70,5 +70,4 @@ int display_history(__attribute__((unused))char **cc, __attribute__((unused))int
 		free(lin);
 	}
 	fclose(fl);
-	return (0);
-}
+	return (0);}

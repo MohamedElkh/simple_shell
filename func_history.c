@@ -50,7 +50,7 @@ int fun_history(char *inp)
 		}
 		wf = write(fdf, inp, le);
 
-		if (we < 0)
+		if (wf < 0)
 		{
 			return (-1);
 		}

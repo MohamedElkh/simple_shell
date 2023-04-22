@@ -49,7 +49,7 @@ void *arr_filled(int n, unsigned int le, void *p);
 void *fre_locate(void *p, size_t oldvalue, size_t newvalue);
 
 void _removalhash(char *loc);
-char *_takeline(void);
+char *_takeline();
 char *_envget(char *str);
 char *p_build(char *val, char *tok);
 int _search_cmd(char **c);
@@ -60,7 +60,7 @@ int dis_env_help(__attribute__((unused)) int last, char **cmm);
 int dir_change(__attribute__((unused)) int last, char **cmd);
 void built_exit(int s, char **cmd, char *input, char **argv);
 int echo_print(char **cm);
-int display_history(__attribute__((unused))char **cc, __attribute__((unused))int ss);
+int display_history(__attribute__((unused))int ss, __attribute__((unused))char **cc);
 void enviro_free(char **en);
 int fun_history(char *inp);
 
@@ -83,7 +83,7 @@ void func_file_read(char *name, char **argv);
 typedef struct built
 {
 	char *str;
-	int (*f)(char **li, int err);
+	int (*f)(int err, char **li);
 } b_t;
 
 #endif
