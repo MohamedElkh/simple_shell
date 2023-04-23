@@ -1,4 +1,4 @@
-#include "shell.h"
+ "shell.h"
 
 /**
  * strchara - function locate char in str
