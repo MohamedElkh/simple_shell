@@ -95,5 +95,5 @@ int _search_cmd(char **c)
 		vl = strtoken(NULL, ":");
 	}
 	free(ph);
-	return (1);
+	 (1);
 }
