@@ -48,7 +48,7 @@ void *_locatemem(unsigned int value);
 void *arr_filled(int n, unsigned int le, void *p);
 void *fre_locate(void *p, size_t oldvalue, size_t newvalue);
 
-void _removalhash(char *loc);
+void _removalhash(char *bf);
 char *_takeline();
 char *_envget(char *str);
 char *p_build(char *val, char *tok);

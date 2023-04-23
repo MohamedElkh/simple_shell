@@ -56,7 +56,7 @@ int display_history(__attribute__((unused))int ss, __attribute__((unused))char *
 		return (-1);
 	}
 	
-	while (-1 != (_takeline(&lin, &le, fl)))
+	while ((_takeline(&lin, &le, fl)) != -1)
 	{
 		count++;
 		err = p_itoa(count);

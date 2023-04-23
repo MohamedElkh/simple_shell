@@ -141,7 +141,7 @@ void func_file_read(char *name, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	while (-1 != (_takeline(&li, &length, file)))
+	while ((_takeline(&li, &length, file)) != -1)
 	{
 		count++;
 		check_t_file(count, li, argv, file);

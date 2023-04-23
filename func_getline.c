@@ -7,15 +7,15 @@
  * Return: nothing.
  */
 
-void _removalhash(char *loc)
+void _removalhash(char *bf)
 {
 	int x;
 
-	for (x = 0; loc[x] != '\0'; x++)
+	for (x = 0; bf[x] != '\0'; x++)
 	{
-		if (loc[x] == '#')
+		if (bf[x] == '#')
 		{
-			loc[x] = '\0';
+			bf[x] = '\0';
 			break;
 		}
 	}
