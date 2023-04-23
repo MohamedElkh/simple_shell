@@ -1,4 +1,4 @@
- "shell.h"
+#include "shell.h"
 
 /**
  * rev_arr - function to reverse array
