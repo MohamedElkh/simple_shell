@@ -1,7 +1,7 @@
- "shell.h"
+#include "shell.h"
 
 /**
- * echo_print - function to excute echo
+ * echo_print - function to execute echo
  * @cm: the character to be checked
  * Return: the result.
  */
