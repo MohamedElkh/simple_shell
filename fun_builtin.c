@@ -8,7 +8,7 @@
  * Return: the result.
  */
 
-int bul_echo(int str, char **cm)
+int bul_echo(char **cm, int str)
 {
 	unsigned int p = getppid();
 	char *pat;
@@ -45,7 +45,7 @@ int bul_echo(int str, char **cm)
  * Return: the result.
  */
 
-int env_display(__attribute__((unused)) int last, __attribute__((unused)) char **cmm)
+int env_display(__attribute__((unused)) char **cmm, __attribute__((unused)) int last)
 {
 	int length;
 	unsigned int x;
@@ -67,7 +67,7 @@ int env_display(__attribute__((unused)) int last, __attribute__((unused)) char *
  * Return: the result.
  */
 
-int dis_env_help(__attribute__((unused)) int last, char **cmm)
+int dis_env_help(char **cmm, __attribute__((unused)) int last)
 {
 	char s;
 	int rdf = 1, fwf, fdf;
@@ -100,7 +100,7 @@ int dis_env_help(__attribute__((unused)) int last, char **cmm)
  * Return: the result.
  */
 
-int dir_change(__attribute__((unused)) int last, char **cmd)
+int dir_change(char **cmd, __attribute__((unused)) int last)
 {
 	char cwd[PATH_MAX];
 	int val = -1;

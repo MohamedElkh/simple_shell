@@ -42,7 +42,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		}
 		else if (func_built_check(cmd) == 0)
 		{
-			val = f_handle_built(val, cmd);
+			val = f_handle_built(cmd, val);
 			_arrfree(inp, cmd);
 			continue;
 		}

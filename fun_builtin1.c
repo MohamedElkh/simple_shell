@@ -41,7 +41,7 @@ int echo_print(char **cm)
  * Return: the result.
  */
 
-int display_history(__attribute__((unused))int ss, __attribute__((unused))char **cc)
+int display_history(__attribute__((unused))char **cc, __attribute__((unused))int ss)
 {
 	char *flname = ".simple_shell_history";
 	size_t le = 0;

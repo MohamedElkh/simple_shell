@@ -53,20 +53,22 @@ char *_takeline();
 char *_envget(char *str);
 char *p_build(char *val, char *tok);
 int _search_cmd(char **c);
+/* b_t functions to be checked */
+int bul_echo(char **cm, int str);
+int env_display(char **cmm, int last);
+int dis_env_help(char **cmm, int last);
+int dir_change(char **cmd, int last);
 
-int bul_echo(int str, char **cm);
-int env_display(__attribute__((unused)) int last, __attribute__((unused)) char **cmm);
-int dis_env_help(__attribute__((unused)) int last, char **cmm);
-int dir_change(__attribute__((unused)) int last, char **cmd);
 void built_exit(int s, char **cmd, char *input, char **argv);
 int echo_print(char **cm);
-int display_history(__attribute__((unused))int ss, __attribute__((unused))char **cc);
+int display_history(char **cc, int ss);
 void enviro_free(char **en);
 int fun_history(char *inp);
 
 void f_signal_handel(int n);
 int func_cmd_check(int n, char *inp, char **cmd, char **argv);
-int f_handle_built(int last, char **cmd);
+/* function to handle the functions */
+int f_handle_built(char **cmd, int last);
 
 void c_arr_envi(char **env);
 void exit_shell(char *li, char **cmd, FILE *file);
@@ -83,7 +85,7 @@ void func_file_read(char *name, char **argv);
 typedef struct built
 {
 	char *str;
-	int (*f)(int err, char **li);
+	int (*f)(char **chara, int number);
 } b_t;
 
 #endif

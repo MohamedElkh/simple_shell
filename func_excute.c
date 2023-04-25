@@ -71,16 +71,16 @@ int func_cmd_check(int n, char *inp, char **cmd, char **argv)
  * Return: the result.
  */
 
-int f_handle_built(int last, char **cmd)
+int f_handle_built(char **cmd, int last)
 {
 	int x = 0;
 
 	b_t p[] = {
-		{"cd", dir_change},
 		{"env", env_display},
+		{"cd", dir_change},
 		{"help", dis_env_help},
-		{"echo", bul_echo},
 		{"history", display_history},
+		{"echo", bul_echo},
 		{NULL, NULL}
 	};
 
@@ -88,7 +88,7 @@ int f_handle_built(int last, char **cmd)
 	{
 		if (_comparestr(cmd[0], (p + x)->str) == 0)
 		{
-			return ((p + x)->f(last, cmd));
+			return ((p + x)->f(cmd, last));
 		}
 		x++;
 	}

@@ -109,7 +109,7 @@ void check_t_file(int count, char *li, char **argv, FILE *file)
 	}
 	else if(func_built_check(cmd) == 0)
 	{
-		str = f_handle_built(str, cmd);
+		str = f_handle_built(cmd, str);
 		free(cmd);
 	}
 	else
