@@ -66,9 +66,9 @@ int func_built_check(char **cm)
 {
 	b_t p[] = {
 		{"cd", NULL},
-		{"echo", NULL},
 		{"help", NULL},
 		{"history", NULL},
+		{"echo", NULL},
 		{NULL, NULL}
 	};
 
