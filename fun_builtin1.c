@@ -14,7 +14,7 @@ int echo_print(char **cm)
 	p = fork();
 	if (p == 0)
 	{
-		if (execve("/bin/echo", cm, environment) == -1)
+		if (execve("/bin/echo", cm, environ) == -1)
 		{
 			return (-1);
 		}

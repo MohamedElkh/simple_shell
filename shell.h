@@ -17,7 +17,7 @@
 #define P_PRINT(s) (write(STDOUT_FILENO, s,_stringlength(s)))
 #define DELI " \t\r\n\a"
 
-extern char **environment;
+extern char **environ;
 int _stringlength(char *str);
 int _putchar(char c);
 void _pputs(char *s);

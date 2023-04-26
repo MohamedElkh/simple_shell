@@ -14,11 +14,11 @@ char *_envget(char *str)
 
 	num = _stringlength(str);
 
-	for (i = 0; environment[i]; i++)
+	for (i = 0; environ[i]; i++)
 	{
-		if (strncompare(str, environment[i], num) == 0)
+		if (strncompare(str, environ[i], num) == 0)
 		{
-			vv = _stringlength(environment[i]) - num;
+			vv = _stringlength(environ[i]) - num;
 			val = malloc(sizeof(char) * vv);
 
 			if (!val)
@@ -28,9 +28,9 @@ char *_envget(char *str)
 				return (NULL);
 			}
 			a = 0;
-			for (x = num + 1; environment[i][x]; x++, a++)
+			for (x = num + 1; environ[i][x]; x++, a++)
 			{
-				val[a] = environment[i][x];
+				val[a] = environ[i][x];
 			}
 			val[a] = '\0';
 			return (val);

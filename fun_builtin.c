@@ -50,10 +50,10 @@ int env_display(__attribute__((unused)) char **cmm, __attribute__((unused)) int 
 	int length;
 	unsigned int x;
 
-	for (x = 0; environment[x] != NULL; x++)
+	for (x = 0; environ[x] != NULL; x++)
 	{
-		length = _stringlength(environment[x]);
-		write(1, environment[x], length);
+		length = _stringlength(environ[x]);
+		write(1, environ[x], length);
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	return (0);

@@ -49,7 +49,7 @@ int func_cmd_check(int n, char *inp, char **cmd, char **argv)
 		{
 			_search_cmd(cmd);
 		}
-		if (execve(*cmd, cmd, environment) == -1)
+		if (execve(*cmd, cmd, environ) == -1)
 		{
 			display_error(n, cmd[0], argv);
 			free(inp);
