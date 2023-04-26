@@ -37,7 +37,7 @@ int echo_print(char **cm)
  * display_history - function to display history
  * @cc: the character to be checked
  * @ss: the character to be checked
- * 
+ *
  * Return: the result.
  */
 
@@ -55,7 +55,7 @@ int display_history(__attribute__((unused))char **cc, __attribute__((unused))int
 	{
 		return (-1);
 	}
-	
+
 	while ((_takeline(&lin, &le, fl)) != -1)
 	{
 		count++;
