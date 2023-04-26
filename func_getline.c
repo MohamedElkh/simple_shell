@@ -28,7 +28,7 @@ void _removalhash(char *bf)
  * Return: the result.
  */
 
-char *_takeline()
+char *_getline()
 {
 	char s = 0;
 	int x, rdf, bfsize = BUF_SIZE;

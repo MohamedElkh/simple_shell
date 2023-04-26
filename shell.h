@@ -109,4 +109,5 @@ int dir_change(char **cmd, __attribute__((unused)) int last);
 void prompt(void);
 char *_memcpy(char *src, char *desti, size_t num);
 void *_calloc(unsigned int value);
+char *_getline();
 #endif
