@@ -11,9 +11,9 @@ void c_arr_envi(char **env)
 {
 	int x;
 
-	for (x = 0; environment[x]; x++)
+	for (x = 0; environ[x]; x++)
 	{
-		env[x] = _duplicatestr(environment[x]);
+		env[x] = _duplicatestr(environ[x]);
 	}
 	env[x] = NULL;
 }

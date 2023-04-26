@@ -1,19 +1,19 @@
 #include "shell.h"
 
 /**
- * _stringlength - function to count the length of str
+ * _strlen - function to count the length of str
  * @str: the character to be checked
  *
  * Return: the result.
  */
 
-int _stringlength(char *str)
+int _strlen(char *str)
 {
 	int x = 0;
 
-	while (str[x] != '\0')
+	for (x = 0;str[x] != '\0'; x++)
 	{
-		x++;
+		continue;
 	}
 	return (x);
 }
@@ -31,13 +31,13 @@ int _putchar(char c)
 }
 
 /**
- * _pputs - function to print the string
+ * _puts - function to print the string
  * @s: the character to be checked
  *
  * Return: nothing.
  */
 
-void _pputs(char *s)
+void _puts(char *s)
 {
 	int x;
 
@@ -46,16 +46,17 @@ void _pputs(char *s)
 		_putchar(s[x]);
 	}
 	_putchar('\n');
+	return;
 }
 
 /**
- * p_atoi - function to convert to intigar
+ * _atoi - function to convert to intigar
  * @str: string
  *
  * Return: the result.
  */
 
-int p_atoi(char *str)
+int _atoi(char *str)
 {
 	int a, nu, x, i;
 	a = nu = 0;
@@ -81,7 +82,7 @@ int p_atoi(char *str)
 }
 
 /**
- * _strncopy - function to copy the string
+ * _strncpy - function to copy the string
  * @desti: the character to be checked
  * @src: the character to be checked
  * @num: the number to be checked
@@ -89,7 +90,7 @@ int p_atoi(char *str)
  * Return: the result.
  */
 
-char *_strncopy(char *desti, char *src, int num)
+char *_strncpy(char *desti, char *src, int num)
 {
 	int x = 0;
 

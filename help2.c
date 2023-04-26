@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * rev_arr - function to reverse array
+ * array_rev - function to reverse array
  * @array: the array to be reversed
  * @le: the length of the array
  *
  * Return: nothing.
  */
 
-void rev_arr(char *array, int le)
+void array_rev(char *array, int le)
 {
 	char val;
 	int x;
@@ -22,13 +22,13 @@ void rev_arr(char *array, int le)
 }
 
 /**
- * _lengthint - function to determine the len of int
+ * _intlen - function to determine the len of int
  * @n: the character to be checked
  *
  * Return: the result.
  */
 
-int _lengthint(int n)
+int _intlen(int n)
 {
 	int le = 0;
 
@@ -41,13 +41,13 @@ int _lengthint(int n)
 }
 
 /**
- * _charaisa - function to check
+ * _isalpha - function to check
  * @n: the character to be checked
  *
  * Return: the result.
  */
 
-int _charaisa(int n)
+int _isalpha(int n)
 {
 	if (((n >= 97) && (n <= 122)) || ((n >= 65) && (n <= 90)))
 	{
@@ -60,20 +60,20 @@ int _charaisa(int n)
 }
 
 /**
- * _comparestr - function to compare two str
+ * _strcmp - function to compare two str
  * @str: the first character to be checked
  * @str2: the second character to be checked
  *
  * Return: the result.
  */
 
-int _comparestr(char *str, char *str2)
+int _strcmp(char *str, char *str2)
 {
 	int x, val = 0;
 	int le, le2;
 
-	le = _stringlength(str);
-	le2 = _stringlength(str2);
+	le = _strlen(str);
+	le2 = _strlen(str2);
 
 	if (str == NULL || str2 == NULL)
 	{
@@ -99,18 +99,18 @@ int _comparestr(char *str, char *str2)
 }
 
 /**
- * p_itoa - function to convert int to char
+ * _itoa - function to convert int to char
  * @num: the character to be checked
  *
  * Return: the result.
  */
 
-char *p_itoa(size_t num)
+char *_itoa(size_t num)
 {
 	char *str;
 	int le = 0, x = 0;
 
-	le = _lengthint(num);
+	le = _intlen(num);
 	str = malloc(le + 1);
 
 	if (!str)
@@ -123,7 +123,7 @@ char *p_itoa(size_t num)
 		x++;
 	}
 	str[x] = (num % 10) + '0';
-	rev_arr(str, le);
+	array_rev(str, le);
 	str[x + 1] = '\0';
 	return (str);
 

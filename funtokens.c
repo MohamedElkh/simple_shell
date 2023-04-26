@@ -23,14 +23,14 @@ size_t ch_del(char cc, const char *s)
 }
 
 /**
- * strtoken - function a string to token
+ * _strtok - function a string to token
  * @s: the character to be checked
- * @del: the character to be checked
+ * @deli: the character to be checked
  *
  * Return: the result.
  */
 
-char *strtoken(char *s, const char *deli)
+char *_strtok(char *s, const char *deli)
 {
 	static char *cht;
         static char *chn;

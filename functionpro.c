@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * p_pro - function to display shell prompt
+ * prompt - function to display shell prompt
  * @void: nothing.
  *
  * Return: nothing.
  */
 
-void p_pro(void)
+void prompt(void)
 {
 	P_PRINT("$ ");
 }
@@ -27,7 +27,7 @@ void display_error(int count, char *inp, char **argv)
 
 	P_PRINT(argv[0]);
 	P_PRINT(": ");
-	val = p_itoa(count);
+	val = _itoa(count);
 	P_PRINT(val);
 	free(val);
 	P_PRINT(": ");
@@ -44,9 +44,9 @@ void display_error(int count, char *inp, char **argv)
  * Return: nothing.
  */
 
-void prin_error(int n, char **cm, char **argv)
+void _prerror(int n, char **cm, char **argv)
 {
-	char *val = p_itoa(n);
+	char *val = _itoa(n);
 
 	P_PRINT(argv[0]);
 	P_PRINT(": ");

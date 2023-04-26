@@ -13,19 +13,19 @@ int bul_echo(char **cm, int str)
 	unsigned int p = getppid();
 	char *pat;
 
-	if (strncompare(cm[1], "$?", 2) == 0)
+	if (_strncmp(cm[1], "$?", 2) == 0)
 	{
 		p_num(str);
 		P_PRINT("\n");
 	}
-	else if (strncompare(cm[1], "$$", 2) == 0)
+	else if (_strncmp(cm[1], "$$", 2) == 0)
 	{
 		p_number(p);
 		P_PRINT("\n");
 	}
-	else if (strncompare(cm[1], "$PATH", 5) == 0)
+	else if (_strncmp(cm[1], "$PATH", 5) == 0)
 	{
-		pat = _envget("PATH");
+		pat = _getenv("PATH");
 		P_PRINT(pat);
 		P_PRINT("\n");
 		free(pat);
@@ -52,7 +52,7 @@ int env_display(__attribute__((unused)) char **cmm, __attribute__((unused)) int 
 
 	for (x = 0; environ[x] != NULL; x++)
 	{
-		length = _stringlength(environ[x]);
+		length = _strlen(environ[x]);
 		write(1, environ[x], length);
 		write(STDOUT_FILENO, "\n", 1);
 	}
@@ -109,7 +109,7 @@ int dir_change(char **cmd, __attribute__((unused)) int last)
 	{
 		val = chdir(getenv("HOME"));
 	}
-	else if (_comparestr(cmd[1], "-") == 0)
+	else if (_strcmp(cmd[1], "-") == 0)
 	{
 		val = chdir(getenv("OLDPWD"));
 	}
@@ -156,14 +156,14 @@ void built_exit(int s, char **cmd, char *input, char **argv)
 
 	while (cmd[1][x])
 	{
-		if (_charaisa(cmd[1][x++]) != 0)
+		if (_isalpha(cmd[1][x++]) != 0)
 		{
-			prin_error(s, cmd, argv);
+			_perror(s, cmd, argv);
 			break;
 		}
 		else
 		{
-			stats = p_atoi(cmd[1]);
+			stats = _atoi(cmd[1]);
 			free(input);
 			free(cmd);
 			exit(stats);

@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _copymem - function to copy byte from src
+ * _memcpy - function to copy byte from src
  * @src: the source
  * @desti: the character to be checked
  * @num: the number to be checked
@@ -9,7 +9,7 @@
  * Return: the result.
  */
 
-char *_copymem(char *src, char *desti, size_t num)
+char *_memcpy(char *src, char *desti, size_t num)
 {
 	size_t x;
 
@@ -37,13 +37,13 @@ void _arrfree(char *ch, char **cm)
 }
 
 /**
- * _locatemem - function to allocates memory
+ * _calloc - function to allocates memory
  * @value: the size.
  *
  * Return: nothing.
  */
 
-void *_locatemem(unsigned int value)
+void *_calloc(unsigned int value)
 {
 	unsigned int x;
 	char *val;

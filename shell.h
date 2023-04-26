@@ -88,4 +88,25 @@ typedef struct built
 	int (*f)(char **chara, int number);
 } b_t;
 
+int _strlen(char *str);
+void _puts(char *s);
+int _atoi(char *str);
+char *_strncpy(char *desti, char *src, int num);
+void array_rev(char *array, int le);
+int _intlen(int n);
+int _isalpha(int n);
+int _strcmp(char *str, char *str2);
+char *_itoa(size_t num);
+char *_strchr(char *str, char cc);
+char *_strcpy(char *desti, char *sr);
+int _strncmp(const char *str, const char *str2, unsigned int num);
+char *_strcat(char *desti, char *sr);
+char *_strdup(char *s);
+char *_strtok(char *s, const char *deli);
+size_t ch_del(char cc, const char *s);
+void built_exit(int s, char **cmd, char *input, char **argv);
+int dir_change(char **cmd, __attribute__((unused)) int last);
+void prompt(void);
+char *_memcpy(char *src, char *desti, size_t num);
+void *_calloc(unsigned int value);
 #endif

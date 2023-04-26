@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * strchara - function locate char in str
+ * _strchr - function locate char in str
  * @str: character to be checked
  * @cc: the character to be checked
  *
  * Return: the result.
  */
 
-char *strchara(char *str, char cc)
+char *_strchr(char *str, char cc)
 {
 	do
 	{
@@ -22,20 +22,20 @@ char *strchara(char *str, char cc)
 }
 
 /**
- * strcopy - function to copy the source
+ * _strcpy - function to copy the source
  * @desti: the character to be checked
- * @src: the character to be checked
+ * @sr: the character to be checked
  *
  * Return: the result.
  */
 
-char *strcopy(char *desti, char *src)
+char *_strcpy(char *desti, char *sr)
 {
 	int x = 0;
 
 	while (src[x] != '\0')
 	{
-		desti[x] = src[x];
+		desti[x] = sr[x];
 		x++;
 	}
 	desti[x] = '\0';
@@ -48,10 +48,10 @@ char *strcopy(char *desti, char *src)
  * @str2: the character to be checked
  * @num: the number to be checked
  *
- * Return: the result.
+ * Return: thie result.
  */
 
-int strncompare(const char *str, const char *str2, unsigned int num)
+int _strncmp(const char *str, const char *str2, unsigned int num)
 {
 	unsigned int x;
 
@@ -71,14 +71,14 @@ int strncompare(const char *str, const char *str2, unsigned int num)
 }
 
 /**
- * _strconcat - function to concat two str
+ * _strcat - function to concat two str
  * @desti: the character to be checked
- * @src: the character to be checked
+ * @sr: the character to be checked
  *
  * Return: the result.
  */
 
-char *_strconcat(char *desti, char *src)
+char *_strcat(char *desti, char *sr)
 {
 	char *str = desti;
 
@@ -86,29 +86,29 @@ char *_strconcat(char *desti, char *src)
 	{
 		desti++;
 	}
-	while (*src != '\0')
+	while (*sr != '\0')
 	{
 		*desti = *src;
 		desti++;
-		src++;
+		sr++;
 	}
 	*desti = '\0';
 	return (str);
 }
 
 /**
- * _duplicatestr - function to duplicate str
+ * _strdup - function to duplicate str
  * @s: the character to be checked
  *
  * Return: the result.
  */
 
-char *_duplicatestr(char *s)
+char *_strdup(char *s)
 {
 	char *s2;
 	unsigned int le, x;
 
-	le = _stringlength(s);
+	le = _strlen(s);
 	s2 = malloc(sizeof(char) * (le + 1));
 
 	if (!s2)
