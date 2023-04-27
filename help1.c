@@ -10,8 +10,8 @@
 
 char *_strchr(char *str, char cc)
 {
-	do
-	{
+	do {
+	
 		if (*str == cc)
 		{
 			break;
