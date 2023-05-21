@@ -3,7 +3,7 @@
 
 void print_alias(alias_t *alias);
 void set_alias(char *var_name, char *value);
-int shellby_alias(char **args, char __attribute__((__unused__)) **front);
+int shell_alias(char **args, char __attribute__((__unused__)) **front);
 
 /**
  * set_alias - Will either set an existing alias 'name' with a new value,
@@ -81,7 +81,7 @@ void print_alias(alias_t *alias)
 
 
 /**
- * shellby_alias - Builtin command that either prints all aliases, specific
+ * shell_alias - Builtin command that either prints all aliases, specific
  * aliases, or sets an alias.
  * @args: An array of arguments.
  * @front: A double pointer to the beginning of args.
@@ -89,7 +89,7 @@ void print_alias(alias_t *alias)
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
  */
-int shellby_alias(char **args, char __attribute__((__unused__)) **front)
+int shell_alias(char **args, char __attribute__((__unused__)) **front)
 {
 	alias_t *temp = aliases;
 	char *val;
@@ -137,13 +137,13 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 
 
 /**
- * replace_aliases - Goes through the arguments and replace any matching alias
+ * replacealiases - Goes through the arguments and replace any matching alias
  * with their value.
  * @args: 2D pointer to the arguments.
  *
  * Return: 2D pointer to the arguments.
  */
-char **replace_aliases(char **args)
+char **replacealiases(char **args)
 {
 	alias_t *temp;
 	char *new_val;

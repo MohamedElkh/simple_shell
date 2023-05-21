@@ -1,22 +1,22 @@
 #include "shell.h"
 
-char *get_args(char *line, int *exe_ret);
-int call_args(char **args, char **front, int *exe_ret);
+char *getargs(char *line, int *exe_ret);
+int callargs(char **args, char **front, int *exe_ret);
 
-int run_args(char **args, char **front, int *exe_ret);
-int handle_args(int *exe_ret);
-int check_args(char **args);
+int runargs(char **args, char **front, int *exe_ret);
+int handleargs(int *exe_ret);
+int checkargs(char **args);
 
 
 /**
- * get_args - Gets a command from standard input.
+ * getargs - Gets a command from standard input.
  * @line: A buffer to store the command.
  * @exe_ret: The return value of the last executed command.
  *
  * Return: If an error occurs - NULL.
  *         Otherwise - a pointer to the stored command.
  */
-char *get_args(char *line, int *exe_ret)
+char *getargs(char *line, int *exe_ret)
 {
 	size_t num = 0;
 	ssize_t read;
@@ -42,7 +42,7 @@ char *get_args(char *line, int *exe_ret)
 		{
 			write(STDOUT_FILENO, prompt, 2);
 		}
-		return (get_args(line, exe_ret));
+		return (getargs(line, exe_ret));
 	}
 
 	line[read - 1] = '\0';
@@ -53,14 +53,14 @@ char *get_args(char *line, int *exe_ret)
 }
 
 /**
- * call_args - Partitions operators from commands and calls them.
+ * callargs - Partitions operators from commands and calls them.
  * @args: An array of arguments.
  * @front: A double pointer to the beginning of args.
  * @exe_ret: The return value of the parent process' last executed command.
  *
  * Return: The return value of the last executed command.
  */
-int call_args(char **args, char **front, int *exe_ret)
+int callargs(char **args, char **front, int *exe_ret)
 {
 	int r;
 	int i;
@@ -77,7 +77,7 @@ int call_args(char **args, char **front, int *exe_ret)
 
 			args[i] = NULL;
 			args = replacealiases(args);
-			r = run_args(args, front, exe_ret);
+			r = runargs(args, front, exe_ret);
 
 			if (*exe_ret != 0)
 			{
@@ -100,7 +100,7 @@ int call_args(char **args, char **front, int *exe_ret)
 			args[i] = NULL;
 			args = replacealiases(args);
 
-			r = run_args(args, front, exe_ret);
+			r = runargs(args, front, exe_ret);
 			if (*exe_ret == 0)
 			{
 				args = &args[++i];
@@ -118,19 +118,19 @@ int call_args(char **args, char **front, int *exe_ret)
 	}
 	args = replacealiases(args);
 
-	r = run_args(args, front, exe_ret);
+	r = runargs(args, front, exe_ret);
 	return (r);
 }
 
 /**
- * run_args - Calls the execution of a command.
+ * runargs - Calls the execution of a command.
  * @args: An array of arguments.
  * @front: A double pointer to the beginning of args.
  * @exe_ret: The return value of the parent process' last executed command.
  *
  * Return: The return value of the last executed command.
  */
-int run_args(char **args, char **front, int *exe_ret)
+int runargs(char **args, char **front, int *exe_ret)
 {
 	int x, r;
 
@@ -164,20 +164,20 @@ int run_args(char **args, char **front, int *exe_ret)
 }
 
 /**
- * handle_args - Gets, calls, and runs the execution of a command.
+ * handleargs - Gets, calls, and runs the execution of a command.
  * @exe_ret: The return value of the parent process' last executed command.
  *
  * Return: If an end-of-file is read - END_OF_FILE (-2).
  *         If the input cannot be tokenized - -1.
  *         O/w - The exit value of the last executed command.
  */
-int handle_args(int *exe_ret)
+int handleargs(int *exe_ret)
 {
 	char **args, *line = NULL;
         char **f;
 	int x, ret = 0;
 
-	line = get_args(line, exe_ret);
+	line = getargs(line, exe_ret);
 	if (!line)
 	{
 		return (END_OF_FILE);
@@ -189,7 +189,7 @@ int handle_args(int *exe_ret)
 	{
 		return (ret);
 	}
-	if (check_args(args) != 0)
+	if (checkargs(args) != 0)
 	{
 		*exe_ret = 2;
 
@@ -206,14 +206,14 @@ int handle_args(int *exe_ret)
 			free(args[x]);
 			args[x] = NULL;
 
-			ret = call_args(args, f, exe_ret);
+			ret = callargs(args, f, exe_ret);
 			args = &args[++x];
 			x = 0;
 		}
 	}
 	if (args)
 	{
-		ret = call_args(args, f, exe_ret);
+		ret = callargs(args, f, exe_ret);
 	}
 
 	free(f);
@@ -221,13 +221,13 @@ int handle_args(int *exe_ret)
 }
 
 /**
- * check_args - Checks if there are any leading ';', ';;', '&&', or '||'.
+ * checkargs - Checks if there are any leading ';', ';;', '&&', or '||'.
  * @args: 2D pointer to tokenized commands and arguments.
  *
  * Return: If a ';', '&&', or '||' is placed at an invalid position - 2.
  *	   Otherwise - 0.
  */
-int check_args(char **args)
+int checkargs(char **args)
 {
 	unsigned int x;
 	char *cur, *nx;

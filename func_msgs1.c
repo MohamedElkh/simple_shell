@@ -1,17 +1,17 @@
 #include "shell.h"
 
-char *error_2_exit(char **args);
-char *error_2_cd(char **args);
-char *error_2_syntax(char **args);
-char *error_env(char **args);
-char *error_1(char **args);
+char *error2_exit(char **args);
+char *error2_cd(char **args);
+char *error2_syntax(char **args);
+char *errorenv(char **args);
+char *error1(char **args);
 /**
- * error_env - Creates an error message for shellby_env errors.
+ * errorenv - Creates an error message for shellby_env errors.
  * @args: An array of arguments passed to the command.
  *
  * Return: The error string.
  */
-char *error_env(char **args)
+char *errorenv(char **args)
 {
 	char *error; 
 	char *hist_string;
@@ -49,12 +49,12 @@ char *error_env(char **args)
 }
 
 /**
- * error_1 - Creates an error message for shellby_alias errors.
+ * error1 - Creates an error message for shellby_alias errors.
  * @args: An array of arguments passed to the command.
  *
  * Return: The error string.
  */
-char *error_1(char **args)
+char *error1(char **args)
 {
 	int i;
 	char *err;
@@ -77,12 +77,12 @@ char *error_1(char **args)
 }
 
 /**
- * error_2_exit - Creates an error message for shellby_exit errors.
+ * error2_exit - Creates an error message for shellby_exit errors.
  * @args: An array of arguments passed to the command.
  *
  * Return: The error string.
  */
-char *error_2_exit(char **args)
+char *error2_exit(char **args)
 {
 	char *error;
         char *hist_string;
@@ -118,12 +118,12 @@ char *error_2_exit(char **args)
 }
 
 /**
- * error_2_cd - Creates an error message for shellby_cd errors.
+ * error2_cd - Creates an error message for shellby_cd errors.
  * @args: An array of arguments passed to the command.
  *
  * Return: The error string.
  */
-char *error_2_cd(char **args)
+char *error2_cd(char **args)
 {
 	char *error; 
 	char *hist_string;
@@ -173,12 +173,12 @@ char *error_2_cd(char **args)
 }
 
 /**
- * error_2_syntax - Creates an error message for syntax errors.
+ * error2_syntax - Creates an error message for syntax errors.
  * @args: An array of arguments passed to the command.
  *
  * Return: The error string.
  */
-char *error_2_syntax(char **args)
+char *error2_syntax(char **args)
 {
 	char *error; 
 	char *hist_string;

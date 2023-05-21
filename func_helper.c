@@ -1,6 +1,6 @@
 #include "shell.h"
 
-void handle_line(char **line, ssize_t read);
+void handleline(char **line, ssize_t read);
 ssize_t get_new_len(char *line);
 void logical_ops(char *line, ssize_t *new_len);
 
@@ -12,7 +12,7 @@ void logical_ops(char *line, ssize_t *new_len);
  * Description: Spaces are inserted to separate ";", "||", and "&&".
  *              Replaces "#" with '\0'.
  */
-void handle_line(char **line, ssize_t read)
+void handleline(char **line, ssize_t read)
 {
 	char previous, current, next;
 	char *old, *new;

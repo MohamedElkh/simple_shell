@@ -1,12 +1,12 @@
 #include "shell.h"
 
-int shellby_env(char **args, char __attribute__((__unused__)) **front);
-int shellby_unsetenv(char **args, char __attribute__((__unused__)) **front);
-int shellby_setenv(char **args, char __attribute__((__unused__)) **front);
+int shell_env(char **args, char __attribute__((__unused__)) **front);
+int shell_unsetenv(char **args, char __attribute__((__unused__)) **front);
+int shell_setenv(char **args, char __attribute__((__unused__)) **front);
 
 
 /**
- * shellby_env - Prints the current environment.
+ * shell_env - Prints the current environment.
  * @args: An array of arguments passed to the shell.
  * @front: A double pointer to the beginning of args.
  *
@@ -16,7 +16,7 @@ int shellby_setenv(char **args, char __attribute__((__unused__)) **front);
  * Description: Prints one variable per line in the
  *              format 'variable'='value'.
  */
-int shellby_env(char **args, char __attribute__((__unused__)) **front)
+int shell_env(char **args, char __attribute__((__unused__)) **front)
 {
 	int i;
 	char newline = '\n';
@@ -38,7 +38,7 @@ int shellby_env(char **args, char __attribute__((__unused__)) **front)
 }
 
 /**
- * shellby_setenv - Changes or adds an environmental variable to the PATH.
+ * shell_setenv - Changes or adds an environmental variable to the PATH.
  * @args: An array of arguments passed to the shell.
  * @front: A double pointer to the beginning of args.
  * Description: args[1] is the name of the new or existing PATH variable.
@@ -47,7 +47,7 @@ int shellby_env(char **args, char __attribute__((__unused__)) **front)
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
  */
-int shellby_setenv(char **args, char __attribute__((__unused__)) **front)
+int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 {
 	char **env_var = NULL, **new_enviro;
         char *new_val;
@@ -108,7 +108,7 @@ int shellby_setenv(char **args, char __attribute__((__unused__)) **front)
 }
 
 /**
- * shellby_unsetenv - Deletes an environmental variable from the PATH.
+ * shell_unsetenv - Deletes an environmental variable from the PATH.
  * @args: An array of arguments passed to the shell.
  * @front: A double pointer to the beginning of args.
  * Description: args[1] is the PATH variable to remove.
@@ -116,7 +116,7 @@ int shellby_setenv(char **args, char __attribute__((__unused__)) **front)
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
  */
-int shellby_unsetenv(char **args, char __attribute__((__unused__)) **front)
+int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 {
 	char **new_enviro, **env_var;
 	int i, x;

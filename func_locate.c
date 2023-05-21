@@ -1,16 +1,16 @@
 #include "shell.h"
 
-list_t *get_path_dir(char *path);
+list_t *getpath_dir(char *path);
 char *fill_path_dir(char *path);
 
 /**
- * get_location - Locates a command in the PATH.
+ * getlocation - Locates a command in the PATH.
  * @command: The command to locate.
  *
  * Return: If an error occurs or the command cannot be located - NULL.
  *         Otherwise - the full pathname of the command.
  */
-char *get_location(char *command)
+char *getlocation(char *command)
 {
 	list_t *dire, *head;
 	struct stat str;
@@ -23,7 +23,7 @@ char *get_location(char *command)
 		return (NULL);
 	}
 
-	dire = get_path_dir(*p + 5);
+	dire = getpath_dir(*p + 5);
 
 	head = dire;
 
@@ -130,13 +130,13 @@ char *fill_path_dir(char *path)
 }
 
 /**
- * get_path_dir - Tokenizes a colon-separated list of
+ * getpath_dir - Tokenizes a colon-separated list of
  *                directories into a list_s linked list.
  * @path: The colon-separated list of directories.
  *
  * Return: A pointer to the initialized linked list.
  */
-list_t *get_path_dir(char *path)
+list_t *getpath_dir(char *path)
 {
 	char **dirs;
         char *path_cpy;
