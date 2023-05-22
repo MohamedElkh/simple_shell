@@ -7,9 +7,10 @@ int shell_alias(char **args, char __attribute__((__unused__)) **front);
 /**
  * set_alias - Will either set an existing alias 'name' with a new value,
  * 'value' or creates a new alias with 'name' and 'value'.
- * @var_name: Name of the alias.
+ * @var_name: Name of the alias to be created or overwritten.
  * @value: Value of the alias. First character is a '='.
  */
+
 void set_alias(char *var_name, char *value)
 {
 	alias_t *temp = aliases;
