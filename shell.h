@@ -23,7 +23,9 @@
 
 /* Global environemnt */
 extern char **environ;
+/* global intergar */
 int hist;
+/* global string */
 char *name;
 
 
