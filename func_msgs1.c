@@ -13,7 +13,7 @@ char *error1(char **args);
  */
 char *errorenv(char **args)
 {
-	char *error; 
+	char *error;
 	char *hist_string;
 	int x;
 
@@ -85,7 +85,7 @@ char *error1(char **args)
 char *error2_exit(char **args)
 {
 	char *error;
-        char *hist_string;
+	char *hist_string;
 	int x;
 
 	hist_string = _itoa(hist);
@@ -125,7 +125,7 @@ char *error2_exit(char **args)
  */
 char *error2_cd(char **args)
 {
-	char *error; 
+	char *error;
 	char *hist_string;
 	int x;
 
@@ -180,7 +180,7 @@ char *error2_cd(char **args)
  */
 char *error2_syntax(char **args)
 {
-	char *error; 
+	char *error;
 	char *hist_string;
 	int x;
 

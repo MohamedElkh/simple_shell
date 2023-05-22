@@ -58,19 +58,19 @@ char **_copyenve(void)
  */
 char **_getenv(const char *var)
 {
-        int i;
-        int l;
+	int i;
+	int l;
 
-        l = _strlen(var);
-        for (i = 0; environ[i]; i++)
-        {
-                if (_strncmp(var, environ[i], l) == 0)
-                {
-                        return (&environ[i]);
-                }
-        }
+	l = _strlen(var);
+	for (i = 0; environ[i]; i++)
+	{
+		if (_strncmp(var, environ[i], l) == 0)
+		{
+			return (&environ[i]);
+		}
+	}
 
-        return (NULL);
+	return (NULL);
 }
 
 

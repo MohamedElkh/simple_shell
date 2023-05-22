@@ -59,7 +59,7 @@ char *_strcat(char *dest, const char *src)
 {
 	const char *temp;
 	char *newdest;
-	
+
 	temp =  src;
 	newdest = dest;
 

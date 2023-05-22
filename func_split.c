@@ -16,7 +16,7 @@ int token_len(char *str, char *delim);
 int token_len(char *str, char *delim)
 {
 	int i = 0;
-        int le = 0;
+	int le = 0;
 
 	while (*(str + i) && *(str + i) != *delim)
 	{
@@ -37,7 +37,7 @@ int token_len(char *str, char *delim)
  */
 int count_tokens(char *str, char *delim)
 {
-	int x, tok = 0; 
+	int x, tok = 0;
 	int le = 0;
 
 	for (x = 0; *(str + x); x++)
@@ -67,7 +67,7 @@ int count_tokens(char *str, char *delim)
 char **_strtok(char *line, char *delim)
 {
 	char **pt;
-	int x = 0, tok, t; 
+	int x = 0, tok, t;
 	int letter, l;
 
 	tok = count_tokens(line, delim);

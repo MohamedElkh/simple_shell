@@ -10,7 +10,7 @@ char *error126(char **args);
  */
 char *error126(char **args)
 {
-	char *error; 
+	char *error;
 	char *hist_string;
 	int x;
 
@@ -53,7 +53,7 @@ char *error126(char **args)
 char *error127(char **args)
 {
 	char *error;
-        char *hist_string;
+	char *hist_string;
 	int x;
 
 	hist_string = _itoa(hist);

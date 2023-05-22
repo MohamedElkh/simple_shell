@@ -13,7 +13,7 @@ int cant_open(char *file_path);
 
 int cant_open(char *file_path)
 {
-	char *error; 
+	char *error;
 	char *hist_string;
 	int x;
 
@@ -64,10 +64,10 @@ int cant_open(char *file_path)
 int procfile_commands(char *file_path, int *exe_ret)
 {
 	ssize_t file, b_read;
-        ssize_t	x;
+	ssize_t	x;
 	unsigned int linesize = 0;
 	unsigned int oldsize = 120;
-	char *line; 
+	char *line;
 	char **args, **front;
 	char buffer[120];
 	int r;

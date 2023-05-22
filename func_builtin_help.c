@@ -7,7 +7,7 @@ void helpsetenv(void);
 
 
 /**
- * help_env - Displays information on the shellby builtin command 'env'.
+ * helpenv - Displays information on the shellby builtin command 'env'.
  */
 
 void helpenv(void)
@@ -18,7 +18,7 @@ void helpenv(void)
 }
 
 /**
- * help_unsetenv - Displays information on the shellby builtin command
+ * helpunsetenv - Displays information on the shellby builtin command
  * 'unsetenv'.
  */
 
@@ -38,7 +38,7 @@ void helpunsetenv(void)
 }
 
 /**
- * help_setenv - Displays information on the shellby builtin command 'setenv'.
+ * helpsetenv - Displays information on the shellby builtin command 'setenv'.
  */
 
 void helpsetenv(void)

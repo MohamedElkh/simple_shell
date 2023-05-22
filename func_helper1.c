@@ -78,7 +78,7 @@ char *get_env_value(char *beginning, int len)
 {
 	char *temp, *v;
 	char **var_ad;
-	char *replace = NULL; 
+	char *replace = NULL;
 
 	v = malloc(len + 1);
 
@@ -126,7 +126,7 @@ char *get_env_value(char *beginning, int len)
 void variablereplacement(char **line, int *exe_ret)
 {
 	int j, x = 0, len;
-	char *replace = NULL; 
+	char *replace = NULL;
 	char *old = NULL, *new;
 
 	old = *line;

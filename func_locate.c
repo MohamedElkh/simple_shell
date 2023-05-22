@@ -68,7 +68,7 @@ char *getlocation(char *command)
 char *fill_path_dir(char *path)
 {
 	int x;
-        int le = 0;
+	int le = 0;
 	char *path_copy, *pwd;
 
 	pwd = *(_getenv("PWD")) + 4;
@@ -139,7 +139,7 @@ char *fill_path_dir(char *path)
 list_t *getpath_dir(char *path)
 {
 	char **dirs;
-        char *path_cpy;
+	char *path_cpy;
 	int x;
 	list_t *head = NULL;
 

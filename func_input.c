@@ -21,7 +21,7 @@ char *getargs(char *line, int *exe_ret)
 	size_t num = 0;
 	ssize_t read;
 	char *prompt = "$ ";
-	
+
 
 	if (line)
 	{
@@ -174,7 +174,7 @@ int runargs(char **args, char **front, int *exe_ret)
 int handleargs(int *exe_ret)
 {
 	char **args, *line = NULL;
-        char **f;
+	char **f;
 	int x, ret = 0;
 
 	line = getargs(line, exe_ret);

@@ -52,7 +52,7 @@ int (*get_builtin(char *command))(char **args, char **front)
 int shell_exit(char **args, char **front)
 {
 	int x;
-        int len_of = 10;
+	int len_of = 10;
 	unsigned int n = 0, max = 1 << (sizeof(int) * 8 - 1);
 
 	if (args[0])
@@ -103,9 +103,7 @@ int shell_exit(char **args, char **front)
  */
 int shell_cd(char **args, char __attribute__((__unused__)) **front)
 {
-	char **dir_in;
-	char *newline = "\n";
-	char *oldpwd = NULL, *pwd = NULL;
+	char **dir_in, *newline = "\n", *oldpwd = NULL, *pwd = NULL;
 	struct stat dir;
 
 	oldpwd = getcwd(oldpwd, 0);
@@ -114,6 +112,7 @@ int shell_cd(char **args, char __attribute__((__unused__)) **front)
 	{
 		return (-1);
 	}
+
 
 	if (args[0])
 	{
@@ -135,7 +134,8 @@ int shell_cd(char **args, char __attribute__((__unused__)) **front)
 		}
 		else
 		{
-			if (stat(args[0], &dir) == 0 && S_ISDIR(dir.st_mode) && ((dir.st_mode & S_IXUSR) != 0))
+			if (stat(args[0], &dir) == 0 && S_ISDIR(dir.st_mode) &&
+					((dir.st_mode & S_IXUSR) != 0))
 			{
 				chdir(args[0]);
 			}
@@ -206,7 +206,7 @@ int shell_cd(char **args, char __attribute__((__unused__)) **front)
  */
 int shell_help(char **args, char __attribute__((__unused__)) **front)
 {
-	
+
 
 	if (!args[0])
 	{

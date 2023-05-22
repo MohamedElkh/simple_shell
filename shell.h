@@ -4,7 +4,7 @@
 /*
  * File: shell.h
  * Auth: Mohamed Elkharashy
- *       
+ *
  */
 
 #include <stdio.h>
@@ -46,9 +46,9 @@ typedef struct list_s
  */
 typedef struct alias_s
 {
-        char *value;
-        char *name;
-        struct alias_s *next;
+	char *value;
+	char *name;
+	struct alias_s *next;
 } alias_t;
 
 /* Global aliases linked list */

@@ -50,7 +50,7 @@ int shell_env(char **args, char __attribute__((__unused__)) **front)
 int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 {
 	char **env_var = NULL, **new_enviro;
-        char *new_val;
+	char *new_val;
 	size_t size;
 	int i;
 
