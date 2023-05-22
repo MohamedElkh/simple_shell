@@ -23,11 +23,18 @@
 
 /* Global environemnt */
 extern char **environ;
-/* global intergar */
-int hist;
-/* global string */
-char *name;
 
+
+/**
+ * struct builtin_s - A new struct type defining builtin commands.
+ * @name: The name of the builtin command.
+ * @f: A function pointer to the builtin command's function.
+ */
+typedef struct builtin_s
+{
+	char *name;
+	int (*f)(char **argv, char **front);
+} builtin_t;
 
 /**
  * struct list_s - A new struct type defining a linked list.
@@ -39,6 +46,7 @@ typedef struct list_s
 	char *dir;
 	struct list_s *next;
 } list_t;
+
 
 /**
  * struct alias_s - A new struct defining aliases.
@@ -56,16 +64,12 @@ typedef struct alias_s
 /* Global aliases linked list */
 alias_t *aliases;
 
-/**
- * struct builtin_s - A new struct type defining builtin commands.
- * @name: The name of the builtin command.
- * @f: A function pointer to the builtin command's function.
- */
-typedef struct builtin_s
-{
-	char *name;
-	int (*f)(char **argv, char **front);
-} builtin_t;
+/* global intergar */
+int hist;
+
+/* global string */
+char *name;
+
 
 /* Input Helpers */
 void handleline(char **line, ssize_t read);
