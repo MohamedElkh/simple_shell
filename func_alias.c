@@ -7,10 +7,51 @@ int shell_alias(char **args, char __attribute__((__unused__)) **front);
 /**
  * set_alias - Will either set an existing alias 'name' with a new value,
  * 'value' or creates a new alias with 'name' and 'value'.
- * @var_name: Name of the alias.
+ * @var_name: Name of the alias to be created or overwritten.
  * @value: Value of the alias. First character is a '='.
  */
 
+void set_alias(char *var_name, char *value)
+{
+	alias_t *temp = aliases;
+	char *new_value;
+	int le, x;
+	int i;
+
+	*value = '\0';
+
+	value++;
+
+	le = _strlen(value) - _strspn(value, "'\"");
+
+	new_value = malloc(sizeof(char) * (le + 1));
+
+	if (!new_value)
+	{
+		return;
+	}
+	for (x = 0, i = 0; value[x]; x++)
+	{
+		if (value[x] != '\'' && value[x] != '"')
+		{
+			new_value[i++] = value[x];
+		}
+	}
+	new_value[i] = '\0';
+
+	while (temp)
+	{
+		if (_strcmp(var_name, temp->name) == 0)
+		{
+			free(temp->value);
+			temp->value = new_value;
+			break;
+		}
+		temp = temp->next;
+	}
+	if (!temp)
+		addalias_end(&aliases, var_name, new_value);
+}
 
 /**
  * print_alias - Prints the alias in the format name='value'.
