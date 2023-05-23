@@ -5,7 +5,6 @@ void helphistory(void);
 void helpenv(void);
 void helpsetenv(void);
 
-
 /**
  * helpenv - Displays information on the shellby builtin command 'env'.
  */
@@ -55,5 +54,3 @@ void helpsetenv(void)
 
 	write(STDOUT_FILENO, mssg, _strlen(mssg));
 }
-
-

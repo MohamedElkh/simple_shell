@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 int count_tokens(char *str, char *delim);
 char **_strtok(char *line, char *delim);
 int token_len(char *str, char *delim);
@@ -13,6 +14,7 @@ int token_len(char *str, char *delim);
  * Return: The delimiter index marking the end of
  *         the intitial token pointed to be str.
  */
+
 int token_len(char *str, char *delim)
 {
 	int i = 0;
@@ -35,6 +37,7 @@ int token_len(char *str, char *delim)
  *
  * Return: The number of words contained within str.
  */
+
 int count_tokens(char *str, char *delim)
 {
 	int x, tok = 0;
@@ -64,6 +67,7 @@ int count_tokens(char *str, char *delim)
  *
  * Return: A pointer to an array containing the tokenized words.
  */
+
 char **_strtok(char *line, char *delim)
 {
 	char **pt;
