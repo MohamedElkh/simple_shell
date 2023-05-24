@@ -1,19 +1,18 @@
 #include "shell.h"
 
-void p_alias(alias_v *alias);
-void set_alias(char *varnam, char *val);
+void p_alias(alias_t *alias);
+void set_aliass(char *varnam, char *val);
 int shell_alias(char **args, char __attribute__((__unused__)) **frov);
 
 /**
- * set_aliass - Will either set an existing alias 'name' with a new value,
- * 'value' or creates a new alias with 'name' and 'value'.
- * @var_name: Name of the alias to be created or overwritten.
- * @value: Value of the alias. First character is a '='.
+ * set_aliass - function Will either set an existing alias 'name'
+ * @varnam: the alias to be created or overwritten.
+ * @val: this the Value of the alias. First character is a '='.
  */
 
 void set_aliass(char *varnam, char *val)
 {
-	alias_v *tmp = aliases_v;
+	alias_t *tmp = aliases;
 	char *new_value;
 	int le, x;
 	int i;
@@ -22,7 +21,7 @@ void set_aliass(char *varnam, char *val)
 
 	val++;
 
-	le = _strlen(value) - _strspn(value, "'\"");
+	le = _strlen(val) - _strspn(val, "'\"");
 
 	new_value = malloc(sizeof(char) * (le + 1));
 
@@ -51,15 +50,16 @@ void set_aliass(char *varnam, char *val)
 	}
 	if (!tmp)
 	{
-		addalias_end(&aliases_v, varnam, new_value);
+		addalias_end(&aliases, varnam, new_value);
 	}
 }
 
 /**
- * print_alias - func to Prints the alias in the format name='value'.
- * @alias: Pointer to an alias.
+ * p_alias - func to Prints the alias in the format.
+ * @alias: the Pointer to an alias.
  */
-void p_alias(alias_v *alias)
+
+void p_alias(alias_t *alias)
 {
 	char *alias_str;
 
@@ -93,7 +93,7 @@ void p_alias(alias_v *alias)
 
 int shell_alias(char **args, char __attribute__((__unused__)) **frov)
 {
-	alias_v *tmp = aliases_v;
+	alias_t *tmp = aliases;
 	char *val;
 	int x, rx = 0;
 
@@ -108,7 +108,7 @@ int shell_alias(char **args, char __attribute__((__unused__)) **frov)
 	}
 	for (x = 0; args[x]; x++)
 	{
-		tmp = aliases_v;
+		tmp = aliases;
 
 		val = _strchr(args[x], '=');
 
@@ -147,7 +147,7 @@ int shell_alias(char **args, char __attribute__((__unused__)) **frov)
 
 char **replacealiases(char **args)
 {
-	alias_v *tmp;
+	alias_t *tmp;
 	char *new_val;
 	int x;
 
@@ -157,7 +157,7 @@ char **replacealiases(char **args)
 	}
 	for (x = 0; args[x]; x++)
 	{
-		tmp = aliases_v;
+		tmp = aliases;
 
 		while (tmp)
 		{
@@ -168,12 +168,15 @@ char **replacealiases(char **args)
 				if (!new_val)
 				{
 					freeargs(args, args);
+
 					return (NULL);
 				}
 				_strcpy(new_val, tmp->value);
+
 				free(args[x]);
 
 				args[x] = new_val;
+
 				x--;
 				break;
 			}
