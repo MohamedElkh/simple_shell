@@ -1,28 +1,28 @@
 #include "shell.h"
 
-char *_itoa(int num);
-int num_len(int num);
+char *_itoa(int number);
+int num_len(int number);
 int createerror(char **args, int err);
 
 /**
  * num_len - Counts the digit length of a number.
- * @num: The number to measure.
+ * @number: The number to measure.
  *
  * Return: The digit length.
  */
-int num_len(int num)
+int num_len(int number)
 {
 	int l = 1;
 	unsigned int n;
 
-	if (num < 0)
+	if (number < 0)
 	{
 		l++;
-		n = num * -1;
+		n = number * -1;
 	}
 	else
 	{
-		n = num;
+		n = number;
 	}
 	while (n > 9)
 	{
@@ -35,17 +35,18 @@ int num_len(int num)
 
 /**
  * _itoa - Converts an integer to a string.
- * @num: The integer.
+ * @number: the integer.
  *
  * Return: The converted string.
  */
-char *_itoa(int num)
+char *_itoa(int number)
 {
-	int l = num_len(num);
+	int l = num_len(number);
 	char *buf;
 	unsigned int n;
 
 	buf = malloc(sizeof(char) * (l + 1));
+
 	if (!buf)
 	{
 		return (NULL);
@@ -53,20 +54,22 @@ char *_itoa(int num)
 
 	buf[l] = '\0';
 
-	if (num < 0)
+	if (number < 0)
 	{
-		n = num * -1;
+		n = number * -1;
+
 		buf[0] = '-';
 	}
 	else
 	{
-		n = num;
+		n = number;
 	}
 
 	l--;
 
 	do {
 		buf[l] = (n % 10) + '0';
+
 		n /= 10;
 		l--;
 	} while (n > 0);
@@ -78,15 +81,16 @@ char *_itoa(int num)
 /**
  * createerror - Writes a custom error message to stderr.
  * @args: An array of arguments.
- * @err: The error value.
+ * @errs: the error value.
  *
  * Return: The error value.
  */
-int createerror(char **args, int err)
+
+int createerror(char **args, int errs)
 {
 	char *er;
 
-	switch (err)
+	switch (errs)
 	{
 	case -1:
 		er = errorenv(args);
@@ -121,6 +125,6 @@ int createerror(char **args, int err)
 	{
 		free(er);
 	}
-	return (err);
+	return (errs);
 
 }

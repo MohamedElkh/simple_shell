@@ -1,17 +1,20 @@
 #include "shell.h"
 
 
-char *get_env_value(char *beginning, int len);
-void variablereplacement(char **args, int *exe_ret);
-void freeargs(char **args, char **front);
-char *get_pid(void);
+char *getenv_value(char *beginning, int len);
+void variablereplacement(char **line, int *exret);
+void freeargs(char **args, char **main);
+char *gett_pid(void);
 
 /**
- * free_args - Frees up memory taken by args.
- * @args: A null-terminated double pointer containing commands/arguments.
- * @front: A double pointer to the beginning of args.
+ * freeargs - func to Frees up memory taken by args.
+ * @args: null-terminated double pointer containing commands/arguments.
+ * @main: double pointer to the beginning of args.
+ *
+ * Return: nothing.
  */
-void freeargs(char **args, char **front)
+
+void freeargs(char **args, char **main)
 {
 	unsigned int x;
 
@@ -20,21 +23,20 @@ void freeargs(char **args, char **front)
 		free(args[x]);
 	}
 
-	free(front);
+	free(main);
 }
 
 /**
- * get_pid - Gets the current process ID.
- * Description: Opens the stat file, a space-delimited file containing
- *              information about the current process. The PID is the
- *              first word in the file. The function reads the PID into
- *              a buffer and replace the space at the end with a \0 byte.
+ * gett_pid - Gets the current process ID.
+ * @void: nothing.
+ * Description: the Opens the stat file, a space-delimited file containing
  *
- * Return: The current process ID or NULL on failure.
+ * Return: current process ID or NULL on failure.
  */
-char *get_pid(void)
+
+char *gett_pid(void)
 {
-	char *buffer;
+	char *buff;
 	ssize_t f;
 	unsigned int x = 0;
 
@@ -45,40 +47,40 @@ char *get_pid(void)
 		perror("Cant read file");
 		return (NULL);
 	}
-	buffer = malloc(120);
-	if (!buffer)
+	buff = malloc(120);
+
+	if (!buff)
 	{
 		close(f);
 		return (NULL);
 	}
-	read(f, buffer, 120);
+	read(f, buff, 120);
 
-	while (buffer[x] != ' ')
+	while (buff[x] != ' ')
 	{
 		x++;
 	}
 
-	buffer[x] = '\0';
+	buff[x] = '\0';
 
 	close(f);
-	return (buffer);
+	return (buff);
 }
 
 /**
- * get_env_value - Gets the value corresponding to an environmental variable.
+ * getenv_value - func to Gets the value corresponding to an enviro var
  * @beginning: The environmental variable to search for.
  * @len: The length of the environmental variable to search for.
  *
- * Return: If the variable is not found - an empty string.
- *         Otherwise - the value of the environmental variable.
- *
- * Description: Variables are stored in the format VARIABLE=VALUE.
+ * Description: Variables are stored in the format .
+ * Return: variable is not found
  */
-char *get_env_value(char *beginning, int len)
+
+char *getenv_value(char *beginning, int len)
 {
-	char *temp, *v;
-	char **var_ad;
-	char *replace = NULL;
+	char *tmp, *v;
+	char **var_v;
+	char *replce = NULL;
 
 	v = malloc(len + 1);
 
@@ -90,40 +92,41 @@ char *get_env_value(char *beginning, int len)
 
 	_strncat(v, beginning, len);
 
-	var_ad = _getenv(v);
+	var_v = _getenv(v);
 
 	free(v);
-	if (var_ad)
+	if (var_v)
 	{
-		temp = *var_ad;
+		tmp = *var_v;
 
-		while (*temp != '=')
+		while (*tmp != '=')
 		{
-			temp++;
+			tmp++;
 		}
 
-		temp++;
+		tmp++;
 
-		replace = malloc(_strlen(temp) + 1);
-		if (replace)
+		replce = malloc(_strlen(tmp) + 1);
+
+		if (replce)
 		{
-			_strcpy(replace, temp);
+			_strcpy(replce, tmp);
 		}
 	}
 
-	return (replace);
+	return (replce);
 }
 
 /**
- * variablereplacement - Handles variable replacement.
- * @line: A double pointer containing the command and arguments.
- * @exe_ret: A pointer to the return value of the last executed command.
+ * variablereplacement - func to Handles variable replacement.
+ * @line: the double pointer containing the command and arguments.
+ * @exret: the pointer to the return value of the last executed command.
  *
- * Description: Replaces $$ with the current PID, $? with the return value
- *              of the last executed program, and envrionmental variables
- *              preceded by $ with their corresponding value.
+ * Description: the Replaces $$ with the current PID, $?
+ * Return: nothing.
  */
-void variablereplacement(char **line, int *exe_ret)
+
+void variablereplacement(char **line, int *exret)
 {
 	int j, x = 0, len;
 	char *replace = NULL;
@@ -137,24 +140,26 @@ void variablereplacement(char **line, int *exe_ret)
 		{
 			if (old[j + 1] == '$')
 			{
-				replace = get_pid();
+				replace = gett_pid();
+
 				x = j + 2;
 			}
 			else if (old[j + 1] == '?')
 			{
-				replace = _itoa(*exe_ret);
+				replace = _itoa(*exret);
+
 				x = j + 2;
 			}
 			else if (old[j + 1])
 			{
-				/* extract the variable name to search for */
+
 				for (x = j + 1; old[x] && old[x] != '$' && old[x] != ' '; x++)
 				{
 					;
 				}
 
 				len = x - (j + 1);
-				replace = get_env_value(&old[j + 1], len);
+				replace = getenv_value(&old[j + 1], len);
 			}
 			new = malloc(j + _strlen(replace) + _strlen(&old[x]) + 1);
 

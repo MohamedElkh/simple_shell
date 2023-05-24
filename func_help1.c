@@ -1,27 +1,27 @@
 #include "shell.h"
 
 
-int _strlen(const char *s);
-char *_strcat(char *dest, const char *src);
-char *_strcpy(char *dest, const char *src);
-char *_strncat(char *dest, const char *src, size_t n);
+int _strlen(const char *str);
+char *_strcat(char *desti, const char *srcs);
+char *_strcpy(char *desti, const char *srcs);
+char *_strncat(char *desti, const char *srcs, size_t n);
 
 /**
- * _strlen - Returns the length of a string.
- * @s: A pointer to the characters string.
+ * _strlen - function toReturns the length of a string.
+ * @str: pointer to the characters string.
  *
  * Return: The length of the character string.
  */
 
-int _strlen(const char *s)
+int _strlen(const char *str)
 {
 	int l = 0;
 
-	if (!s)
+	if (!str)
 	{
 		return (l);
 	}
-	for (l = 0; s[l]; l++)
+	for (l = 0; str[l]; l++)
 	{
 		;
 	}
@@ -29,77 +29,75 @@ int _strlen(const char *s)
 }
 
 /**
- * _strcpy - Copies the string pointed to by src, including the
- *           terminating null byte, to the buffer pointed by des.
- * @dest: Pointer to the destination of copied string.
- * @src: Pointer to the src of the source string.
+ * _strcpy - func to copies the string pointed to by src, including the
+ * @desti: the Pointer to the destination of copied string.
+ * @srcs: the src of the source string.
  *
  * Return: Pointer to dest.
  */
 
-char *_strcpy(char *dest, const char *src)
+char *_strcpy(char *desti, const char *srcs)
 {
 	unsigned int x;
 
-	for (x = 0; src[x] != '\0'; x++)
+	for (x = 0; srcs[x] != '\0'; x++)
 	{
-		dest[x] = src[x];
+		desti[x] = srcs[x];
 	}
-	dest[x] = '\0';
+	desti[x] = '\0';
 
-	return (dest);
+	return (desti);
 }
 
 /**
- * _strcat - Concantenates two strings.
- * @dest: Pointer to destination string.
- * @src: Pointer to source string.
+ * _strcat - func to Concantenates two strings.
+ * @desti: the Pointer to destination string.
+ * @srcs: the Pointer to source string.
  *
- * Return: Pointer to destination string.
+ * Return: the Pointer to destination string.
  */
 
-char *_strcat(char *dest, const char *src)
+char *_strcat(char *desti, const char *srcs)
 {
-	const char *temp;
+	const char *tmp;
 	char *newdest;
 
-	temp =  src;
-	newdest = dest;
+	tmp =  srcs;
+	newdest = desti;
 
 	while (*newdest != '\0')
 	{
 		newdest++;
 	}
 
-	while (*temp != '\0')
+	while (*tmp != '\0')
 	{
-		*newdest++ = *temp++;
+		*newdest++ = *tmp++;
 	}
 	*newdest = '\0';
 
-	return (dest);
+	return (desti);
 }
 
 /**
- * _strncat - Concantenates two strings where n number
- *            of bytes are copied from source.
- * @dest: Pointer to destination string.
- * @src: Pointer to source string.
- * @n: n bytes to copy from src.
+ * _strncat - func to Concantenates two strings where n number
+ * @desti: the Pointer to destination string.
+ * @srcs: the Pointer to source string.
+ * @n: num of  bytes to copy from src.
  *
  * Return: Pointer to destination string.
  */
 
-char *_strncat(char *dest, const char *src, size_t n)
+char *_strncat(char *desti, const char *srcs, size_t n)
 {
-	size_t len = _strlen(dest);
+	size_t len = _strlen(desti);
 	unsigned int x;
 
-	for (x = 0; x < n && src[x] != '\0'; x++)
+	for (x = 0; x < n && srcs[x] != '\0'; x++)
 	{
-		dest[len + x] = src[x];
+		desti[len + x] = srcs[x];
 	}
-	dest[len + x] = '\0';
+	desti[len + x] = '\0';
 
-	return (dest);
+	return (desti);
 }

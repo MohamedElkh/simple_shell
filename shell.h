@@ -75,7 +75,7 @@ char *name;
 
 /* Input Helpers */
 void handleline(char **lin, ssize_t ready);
-void variablereplacement(char **args, int *exret);
+void variablereplacement(char **line, int *exret);
 char *getargs(char *lin, int *exret);
 int callargs(char **args, char **main, int *exret);
 int runargs(char **args, char **main, int *exret);
