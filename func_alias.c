@@ -1,8 +1,8 @@
 #include "shell.h"
 
-void print_alias(alias_t *alias);
-void set_alias(char *var_name, char *value);
-int shell_alias(char **args, char __attribute__((__unused__)) **front);
+void p_alias(alias_v *alias);
+void set_alias(char *varnam, char *val);
+int shell_alias(char **args, char __attribute__((__unused__)) **frov);
 
 /**
  * set_alias - Will either set an existing alias 'name' with a new value,
@@ -11,9 +11,9 @@ int shell_alias(char **args, char __attribute__((__unused__)) **front);
  * @value: Value of the alias. First character is a '='.
  */
 
-void set_alias(char *var_name, char *value)
+void set_alias(char *varnam, char *val)
 {
-	alias_t *temp = aliases;
+	alias_v *temp = aliases;
 	char *new_value;
 	int le, x;
 	int i;

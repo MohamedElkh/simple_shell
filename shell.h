@@ -64,7 +64,7 @@ typedef struct alias
 } alias_v;
 
 /* Global aliases linked list */
-alias_v *aliases;
+alias_v *aliases_v;
 
 /* global intergar */
 int hist;
