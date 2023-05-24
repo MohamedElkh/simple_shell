@@ -5,7 +5,7 @@ int _strspn(char *s, char *accept);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_strchr(char *s, char c);
 /**
- * _strchr - Locates a character in a string.
+ * _strchr - Locates a character a strings
  * @s: The string to be searched.
  * @c: The character to be located.
  *

@@ -12,6 +12,7 @@ int shell_exit(char **args, char **front);
  *
  * Return: A function pointer to the corresponding builtin.
  */
+
 int (*get_builtin(char *command))(char **args, char **front)
 {
 	builtin_t func[] = {
@@ -49,6 +50,7 @@ int (*get_builtin(char *command))(char **args, char **front)
  *
  * Description: Upon returning -3, the program exits back in the main function.
  */
+
 int shell_exit(char **args, char **front)
 {
 	int x;
@@ -101,6 +103,7 @@ int shell_exit(char **args, char **front)
  *         If an error occurs - -1.
  *         Otherwise - 0.
  */
+
 int shell_cd(char **args, char __attribute__((__unused__)) **front)
 {
 	char **dir_in, *newline = "\n", *oldpwd = NULL, *pwd = NULL;
@@ -204,6 +207,7 @@ int shell_cd(char **args, char __attribute__((__unused__)) **front)
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
  */
+
 int shell_help(char **args, char __attribute__((__unused__)) **front)
 {
 

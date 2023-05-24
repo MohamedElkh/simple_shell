@@ -12,6 +12,7 @@ char *_strncat(char *dest, const char *src, size_t n);
  *
  * Return: The length of the character string.
  */
+
 int _strlen(const char *s)
 {
 	int l = 0;
@@ -35,6 +36,7 @@ int _strlen(const char *s)
  *
  * Return: Pointer to dest.
  */
+
 char *_strcpy(char *dest, const char *src)
 {
 	unsigned int x;
@@ -55,6 +57,7 @@ char *_strcpy(char *dest, const char *src)
  *
  * Return: Pointer to destination string.
  */
+
 char *_strcat(char *dest, const char *src)
 {
 	const char *temp;
@@ -86,6 +89,7 @@ char *_strcat(char *dest, const char *src)
  *
  * Return: Pointer to destination string.
  */
+
 char *_strncat(char *dest, const char *src, size_t n)
 {
 	size_t len = _strlen(dest);

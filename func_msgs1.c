@@ -5,6 +5,7 @@ char *error2_cd(char **args);
 char *error2_syntax(char **args);
 char *errorenv(char **args);
 char *error1(char **args);
+
 /**
  * errorenv - Creates an error message for shellby_env errors.
  * @args: An array of arguments passed to the command.
