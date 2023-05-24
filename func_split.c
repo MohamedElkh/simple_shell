@@ -2,7 +2,7 @@
 
 
 int count_tokens(char *str, char *delim);
-char **_strtok(char *line, char *delim);
+char **_strtok(char *li, char *delim);
 int token_len(char *str, char *delim);
 
 /**
@@ -62,19 +62,19 @@ int count_tokens(char *str, char *delim)
 
 /**
  * _strtok - Tokenizes a string.
- * @line: The string.
+ * @li: The string.
  * @delim: The delimiter character to tokenize the string by.
  *
  * Return: A pointer to an array containing the tokenized words.
  */
 
-char **_strtok(char *line, char *delim)
+char **_strtok(char *li, char *delim)
 {
 	char **pt;
 	int x = 0, tok, t;
 	int letter, l;
 
-	tok = count_tokens(line, delim);
+	tok = count_tokens(li, delim);
 
 	if (tok == 0)
 	{
@@ -90,12 +90,12 @@ char **_strtok(char *line, char *delim)
 
 	for (t = 0; t < tok; t++)
 	{
-		while (line[x] == *delim)
+		while (li[x] == *delim)
 		{
 			x++;
 		}
 
-		letter = token_len(line + x, delim);
+		letter = token_len(li + x, delim);
 
 		pt[t] = malloc(sizeof(char) * (letter + 1));
 
@@ -111,7 +111,7 @@ char **_strtok(char *line, char *delim)
 
 		for (l = 0; l < letter; l++)
 		{
-			pt[t][l] = line[x];
+			pt[t][l] = li[x];
 
 			x++;
 		}

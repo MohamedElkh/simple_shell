@@ -1,26 +1,27 @@
 #include "shell.h"
 
-void handleline(char **line, ssize_t read);
-ssize_t get_new_len(char *line);
-void logical_ops(char *line, ssize_t *new_len);
+void handleline(char **lin, ssize_t ready);
+ssize_t getnew_len(char *lin);
+void logicalop(char *lin, ssize_t *new_len);
 
 /**
- * handle_line - Partitions a line read from standard input as needed.
- * @line: A pointer to a line read from standard input.
- * @read: The length of line.
+ * handleline - func to Partitions a line read from standard input as needed.
+ * @lin: line read from standard input.
+ * @ready: length of line.
  *
  * Description: Spaces are inserted to separate ";", "||", and "&&".
- *              Replaces "#" with '\0'.
+ * Return: nothing.
  */
-void handleline(char **line, ssize_t read)
+
+void handleline(char **lin, ssize_t ready)
 {
 	char previous, current, next;
 	char *old, *new;
 	unsigned int i, x;
 	ssize_t new_len;
 
-	new_len = get_new_len(*line);
-	if (new_len == read - 1)
+	new_len = getnew_len(*lin);
+	if (new_len == ready - 1)
 	{
 		return;
 	}
@@ -31,7 +32,8 @@ void handleline(char **line, ssize_t read)
 	}
 	x = 0;
 
-	old = *line;
+	old = *lin;
+
 	for (i = 0; old[i]; i++)
 	{
 		current = old[i];
@@ -118,36 +120,33 @@ void handleline(char **line, ssize_t read)
 
 	new[x] = '\0';
 
-	free(*line);
+	free(*lin);
 
-	*line = new;
+	*lin = new;
 }
 
 /**
- * get_new_len - Gets the new length of a line partitioned
- *               by ";", "||", "&&&", or "#".
- * @line: The line to check.
- *
- * Return: The new length of the line.
- *
- * Description: Cuts short lines containing '#' comments with '\0'.
+ * getnew_len - func to Gets the new length of a line partitioned
+ * @lin: The line to check.
+ * Description: Cuts short lines containing
+ * Return: The new length of the line
  */
 
-ssize_t get_new_len(char *line)
+ssize_t getnew_len(char *lin)
 {
 	ssize_t new_l = 0;
 	unsigned int x;
 	char next, current;
 
-	for (x = 0; line[x]; x++)
+	for (x = 0; lin[x]; x++)
 	{
-		current = line[x];
-		next = line[x + 1];
+		current = lin[x];
+		next = lin[x + 1];
 		if (current == '#')
 		{
-			if (x == 0 || line[x - 1] == ' ')
+			if (x == 0 || lin[x - 1] == ' ')
 			{
-				line[x] = '\0';
+				lin[x] = '\0';
 				break;
 			}
 		}
@@ -155,18 +154,18 @@ ssize_t get_new_len(char *line)
 		{
 			if (current == ';')
 			{
-				if (next == ';' && line[x - 1] != ' ' && line[x - 1] != ';')
+				if (next == ';' && lin[x - 1] != ' ' && lin[x - 1] != ';')
 				{
 					new_l += 2;
 
 					continue;
 				}
-				else if (line[x - 1] == ';' && next != ' ')
+				else if (lin[x - 1] == ';' && next != ' ')
 				{
 					new_l += 2;
 					continue;
 				}
-				if (line[x - 1] != ' ')
+				if (lin[x - 1] != ' ')
 				{
 					new_l++;
 				}
@@ -177,12 +176,12 @@ ssize_t get_new_len(char *line)
 			}
 			else
 			{
-				logical_ops(&line[x], &new_l);
+				logicalop(&lin[x], &new_l);
 			}
 		}
 		else if (current == ';')
 		{
-			if (x != 0 && line[x - 1] != ' ')
+			if (x != 0 && lin[x - 1] != ' ')
 			{
 				new_l++;
 			}
@@ -196,19 +195,21 @@ ssize_t get_new_len(char *line)
 	return (new_l);
 }
 /**
- * logical_ops - Checks a line for logical operators "||" or "&&".
- * @line: A pointer to the character to check in the line.
- * @new_len: Pointer to new_len in get_new_len function.
+ * logicalop - func to Checks a line for logical operator
+ * @lin: the character to check in the line.
+ * @new_len: new_len in get_new_len function.
  */
-void logical_ops(char *line, ssize_t *new_len)
+
+void logicalop(char *lin, ssize_t *new_len)
 {
 	char prev, current;
 	char n;
 
-	prev = *(line - 1);
+	prev = *(lin - 1);
 
-	current = *line;
-	n = *(line + 1);
+	current = *lin;
+
+	n = *(lin + 1);
 
 	if (current == '&')
 	{

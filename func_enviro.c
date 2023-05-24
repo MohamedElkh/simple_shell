@@ -2,15 +2,15 @@
 
 
 void free_enve(void);
-char **_getenv(const char *var);
+char **_getenv(const char *vari);
 char **_copyenve(void);
 
 /**
- * _copyenve - Creates a copy of the environment.
+ * _copyenve - func to Creates a copy of the environment.
  *
- * Return: If an error occurs - NULL.
- *         O/w - a double pointer to the new copy.
+ * Return: if the error occurs - NULL.
  */
+
 char **_copyenve(void)
 {
 	size_t size;
@@ -50,21 +50,22 @@ char **_copyenve(void)
 }
 
 /**
- * _getenv - Gets an environmental variable from the PATH.
- * @var: The name of the environmental variable to get.
+ * _getenv - func to Gets an environmental variable
+ * @vari: name of the environmental variable .
  *
  * Return: If the environmental variable does not exist - NULL.
- *         Otherwise - a pointer to the environmental variable.
  */
-char **_getenv(const char *var)
+
+char **_getenv(const char *vari)
 {
 	int i;
 	int l;
 
-	l = _strlen(var);
+	l = _strlen(vari);
+
 	for (i = 0; environ[i]; i++)
 	{
-		if (_strncmp(var, environ[i], l) == 0)
+		if (_strncmp(vari, environ[i], l) == 0)
 		{
 			return (&environ[i]);
 		}
@@ -75,7 +76,9 @@ char **_getenv(const char *var)
 
 
 /**
- * free_enve - Frees the the environment copy.
+ * free_enve - the frees the the environment copy.
+ *
+ * Return: nothing.
  */
 void free_enve(void)
 {

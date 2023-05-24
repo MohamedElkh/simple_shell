@@ -50,10 +50,10 @@ typedef struct list_s
 
 
 /**
- * struct alias_d - A new struct defining aliases.
- * @name: The name of the alias.
- * @value: The value of the alias.
- * @next: A pointer to another struct alias_s.
+ * struct alias_s - new struct defining aliases.
+ * @name: name of the alias.
+ * @value: value of the alias.
+ * @next: pointer struct alias_s.
  */
 
 typedef struct alias_s

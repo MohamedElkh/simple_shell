@@ -1,22 +1,20 @@
 #include "shell.h"
 
-int shell_env(char **args, char __attribute__((__unused__)) **front);
-int shell_unsetenv(char **args, char __attribute__((__unused__)) **front);
-int shell_setenv(char **args, char __attribute__((__unused__)) **front);
+int shell_env(char **args, char __attribute__((__unused__)) **frov);
+int shell_unsetenv(char **args, char __attribute__((__unused__)) **frov);
+int shell_setenv(char **args, char __attribute__((__unused__)) **frov);
 
 
 /**
- * shell_env - Prints the current environment.
- * @args: An array of arguments passed to the shell.
- * @front: A double pointer to the beginning of args.
+ * shell_env - func to Prints the current environment.
+ * @args: array of arguments
+ * @frov: the double pointer to the beginning of args.
  *
- * Return: If an error occurs - -1.
- *	   Otherwise - 0.
- *
- * Description: Prints one variable per line in the
- *              format 'variable'='value'.
+ * Description: Prints one variable per line
+ * Return: 0 always.
  */
-int shell_env(char **args, char __attribute__((__unused__)) **front)
+
+int shell_env(char **args, char __attribute__((__unused__)) **frov)
 {
 	int i;
 	char newline = '\n';
@@ -38,16 +36,15 @@ int shell_env(char **args, char __attribute__((__unused__)) **front)
 }
 
 /**
- * shell_setenv - Changes or adds an environmental variable to the PATH.
- * @args: An array of arguments passed to the shell.
- * @front: A double pointer to the beginning of args.
+ * shell_setenv - func to Changes or adds an environmental
+ * @args: An array of arguments
+ * @frov: pointer to the beginning of args.
  * Description: args[1] is the name of the new or existing PATH variable.
- *              args[2] is the value to set the new or changed variable to.
  *
- * Return: If an error occurs - -1.
- *         Otherwise - 0.
+ * Return: If an error occurs - -1 or  0.
  */
-int shell_setenv(char **args, char __attribute__((__unused__)) **front)
+
+int shell_setenv(char **args, char __attribute__((__unused__)) **frov)
 {
 	char **env_var = NULL, **new_enviro;
 	char *new_val;
@@ -108,15 +105,15 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 }
 
 /**
- * shell_unsetenv - Deletes an environmental variable from the PATH.
- * @args: An array of arguments passed to the shell.
- * @front: A double pointer to the beginning of args.
+ * shell_unsetenv - func to Deletes an environmental variable from the PATH.
+ * @args: An array of arguments
+ * @frov: pointer to the beginning of args.
  * Description: args[1] is the PATH variable to remove.
  *
- * Return: If an error occurs - -1.
- *         Otherwise - 0.
+ * Return: If an error occurs 0 always.
  */
-int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
+
+int shell_unsetenv(char **args, char __attribute__((__unused__)) **frov)
 {
 	char **new_enviro, **env_var;
 	int i, x;

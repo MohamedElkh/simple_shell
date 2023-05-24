@@ -1,19 +1,18 @@
 #include "shell.h"
 
-int shell_cd(char **args, char __attribute__((__unused__)) **front);
-int shell_help(char **args, char __attribute__((__unused__)) **front);
-int (*get_builtin(char *command))(char **args, char **front);
-int shell_exit(char **args, char **front);
+int shell_cd(char **args, char __attribute__((__unused__)) **frov);
+int shell_help(char **args, char __attribute__((__unused__)) **frov);
+int (*get_builtin(char *commands))(char **args, char **frov);
+int shell_exit(char **args, char **frov);
 
 /**
- * get_builtin - Matches a command with a corresponding
- *               shellby builtin function.
- * @command: The command to match.
+ * get_builtin - func to Matches a command with a corresponding
+ * @commands: command to match.
  *
- * Return: A function pointer to the corresponding builtin.
+ * Return: function pointer to the corresponding builtin.
  */
 
-int (*get_builtin(char *command))(char **args, char **front)
+int (*get_builtin(char *commands))(char **args, char **frov)
 {
 	builtin_t func[] = {
 		{ "env", shell_env },
@@ -30,7 +29,7 @@ int (*get_builtin(char *command))(char **args, char **front)
 
 	for (x = 0; func[x].name; x++)
 	{
-		if (_strcmp(func[x].name, command) == 0)
+		if (_strcmp(func[x].name, commands) == 0)
 		{
 			break;
 		}
@@ -39,19 +38,15 @@ int (*get_builtin(char *command))(char **args, char **front)
 }
 
 /**
- * shell_exit - Causes normal process termination
- *                for the shellby shell.
- * @args: An array of arguments containing the exit value.
- * @front: A double pointer to the beginning of args.
- *
- * Return: If there are no arguments - -3.
- *         If the given exit value is invalid - 2.
- *         O/w - exits with the given status value.
+ * shell_exit - func to Causes normal process termination
+ * @args: arguments containing the exit value.
+ * @frov: double pointer to the beginning of args.
  *
  * Description: Upon returning -3, the program exits back in the main function.
+ * Return: 0 always.
  */
 
-int shell_exit(char **args, char **front)
+int shell_exit(char **args, char **frov)
 {
 	int x;
 	int len_of = 10;
@@ -86,7 +81,7 @@ int shell_exit(char **args, char **front)
 		return (createerror(--args, 2));
 	}
 	args -= 1;
-	freeargs(args, front);
+	freeargs(args, frov);
 
 	free_enve();
 
@@ -95,16 +90,14 @@ int shell_exit(char **args, char **front)
 }
 
 /**
- * shell_cd - Changes the current directory of the shellby process.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * shell_cd - func to Changes the current directory
+ * @args: array of arguments.
+ * @frov: the beginning of args.
  *
- * Return: If the given string is not a directory - 2.
- *         If an error occurs - -1.
- *         Otherwise - 0.
+ * Return: If the given string is not a directory - 2
  */
 
-int shell_cd(char **args, char __attribute__((__unused__)) **front)
+int shell_cd(char **args, char __attribute__((__unused__)) **frov)
 {
 	char **dir_in, *newline = "\n", *oldpwd = NULL, *pwd = NULL;
 	struct stat dir;
@@ -200,15 +193,14 @@ int shell_cd(char **args, char __attribute__((__unused__)) **front)
 }
 
 /**
- * shell_help - Displays information about shellby builtin commands.
- * @args: An array of arguments.
- * @front: A pointer to the beginning of args.
+ * shell_help - func to Displays information about shellby builtin commands.
+ * @args: array of arguments.
+ * @frov: pointer
  *
- * Return: If an error occurs - -1.
- *         Otherwise - 0.
+ * Return: If an error occurs
  */
 
-int shell_help(char **args, char __attribute__((__unused__)) **front)
+int shell_help(char **args, char __attribute__((__unused__)) **frov)
 {
 
 

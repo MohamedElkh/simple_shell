@@ -1,35 +1,33 @@
 #include "shell.h"
 
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_realloc(void *ptr, unsigned int old_value, unsigned int new_value);
 
-void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+void assign_lineptr(char **linptr, size_t *n, char *buff, size_t b);
+ssize_t _getline(char **lptr, size_t *num, FILE *stream);
 
 /**
- * _realloc - Reallocates a memory block using malloc and free.
- * @ptr: A pointer to the memory previously allocated.
- * @old_size: The size in bytes of the allocated space for ptr.
- * @new_size: The size in bytes for the new memory block.
+ * _realloc - func to realoce a memory block using malloc and free.
+ * @ptr: the memory previously allocated.
+ * @old_value: The size in bytes
+ * @new_value: The size in bytes
  *
- * Return: If new_size == old_size - ptr.
- *         If new_size == 0 and ptr is not NULL - NULL.
- *         Otherwise - a pointer to the reallocated memory block.
+ * Return: if new_size == old_size - ptr
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *ptr, unsigned int old_value, unsigned int new_value)
 {
 	void *mem;
 	unsigned int i;
 	char *ptr_cpy;
 	char *fill;
 
-	if (new_size == old_size)
+	if (new_value == old_value)
 	{
 		return (ptr);
 	}
 
 	if (ptr == NULL)
 	{
-		mem = malloc(new_size);
+		mem = malloc(new_value);
 
 		if (mem == NULL)
 		{
@@ -39,7 +37,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		return (mem);
 	}
 
-	if (new_size == 0 && ptr != NULL)
+	if (new_value == 0 && ptr != NULL)
 	{
 		free(ptr);
 
@@ -47,7 +45,8 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	}
 
 	ptr_cpy = ptr;
-	mem = malloc(sizeof(*ptr_cpy) * new_size);
+
+	mem = malloc(sizeof(*ptr_cpy) * new_value);
 	if (mem == NULL)
 	{
 		free(ptr);
@@ -57,7 +56,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	fill = mem;
 
-	for (i = 0; i < old_size && i < new_size; i++)
+	for (i = 0; i < old_value && i < new_value; i++)
 	{
 		fill[i] = *ptr_cpy++;
 	}
@@ -67,15 +66,16 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 }
 
 /**
- * assign_lineptr - Reassigns the lineptr variable for _getline.
- * @lineptr: A buffer to store an input string.
- * @n: The size of lineptr.
- * @buffer: The string to assign to lineptr.
- * @b: The size of buffer.
+ * assig_linptr - func to the lineptr variable for _getline.
+ * @linptr: buffer to store an input string.
+ * @n: size of lineptr.
+ * @buff: string to assign to lineptr.
+ * @b: size of buffer.
  */
-void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
+
+void assig_linptr(char **linptr, size_t *n, char *buff, size_t b)
 {
-	if (*lineptr == NULL)
+	if (*linptr == NULL)
 	{
 		if (b > 120)
 		{
@@ -86,7 +86,7 @@ void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
 			*n = 120;
 		}
 
-		*lineptr = buffer;
+		*linptr = buff;
 	}
 	else if (*n < b)
 	{
@@ -99,25 +99,26 @@ void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
 			*n = 120;
 		}
 
-		*lineptr = buffer;
+		*linptr = buff;
 	}
 	else
 	{
-		_strcpy(*lineptr, buffer);
+		_strcpy(*linptr, buff);
 
-		free(buffer);
+		free(buff);
 	}
 }
 
 /**
- * _getline - Reads input from a stream.
- * @lineptr: A buffer to store the input.
- * @n: The size of lineptr.
- * @stream: The stream to read from.
+ * _getline - func to Reads input from a stream.
+ * @lptr: abuffer to store the input.
+ * @num: The size of lineptr.
+ * @stream: the stream
  *
- * Return: The number of bytes read.
+ * Return: number of bytes read.
  */
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
+
+ssize_t _getline(char **lptr, size_t *num, FILE *stream)
 {
 	static ssize_t input;
 	ssize_t rt;
@@ -170,7 +171,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 
 	buf[input] = '\0';
 
-	assign_lineptr(lineptr, n, buf, input);
+	assign_lineptr(lptr, num, buf, input);
 
 	rt = input;
 

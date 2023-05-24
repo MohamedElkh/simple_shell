@@ -7,11 +7,12 @@ char *errorenv(char **args);
 char *error1(char **args);
 
 /**
- * errorenv - Creates an error message for shellby_env errors.
- * @args: An array of arguments passed to the command.
+ * errorenv - func to Creates an error message for shellby_env errors.
+ * @args: array of arguments passed to the command.
  *
- * Return: The error string.
+ * Return: error string.
  */
+
 char *errorenv(char **args)
 {
 	char *error;
@@ -50,11 +51,12 @@ char *errorenv(char **args)
 }
 
 /**
- * error1 - Creates an error message for shellby_alias errors.
- * @args: An array of arguments passed to the command.
+ * error1 - func to creates an error message for shellby_alias errors.
+ * @args: arguments passed to the command.
  *
- * Return: The error string.
+ * Return: error string.
  */
+
 char *error1(char **args)
 {
 	int i;
@@ -78,11 +80,12 @@ char *error1(char **args)
 }
 
 /**
- * error2_exit - Creates an error message for shellby_exit errors.
- * @args: An array of arguments passed to the command.
+ * error2_exit - func to Creates an error message for shellby_exit errors.
+ * @args: array of arguments passed to the command.
  *
- * Return: The error string.
+ * Return: the error string.
  */
+
 char *error2_exit(char **args)
 {
 	char *error;
@@ -119,11 +122,12 @@ char *error2_exit(char **args)
 }
 
 /**
- * error2_cd - Creates an error message for shellby_cd errors.
- * @args: An array of arguments passed to the command.
+ * error2_cd - func to Creates an error message for shellby_cd errors.
+ * @args: arguments passed to the command.
  *
- * Return: The error string.
+ * Return: error string.
  */
+
 char *error2_cd(char **args)
 {
 	char *error;
@@ -174,8 +178,8 @@ char *error2_cd(char **args)
 }
 
 /**
- * error2_syntax - Creates an error message for syntax errors.
- * @args: An array of arguments passed to the command.
+ * error2_syntax - func to Creates an error message for syntax errors.
+ * @args: array of arguments
  *
  * Return: The error string.
  */

@@ -5,12 +5,12 @@ char *fill_path_dir(char *path);
 
 /**
  * getlocation - Locates a command in the PATH.
- * @command: The command to locate.
+ * @commands: the command to locate.
  *
- * Return: If an error occurs or the command cannot be located - NULL.
- *         Otherwise - the full pathname of the command.
+ * Return: if an error occurs or the command cannot be located - NULL.
  */
-char *getlocation(char *command)
+
+char *getlocation(char *commands)
 {
 	list_t *dire, *head;
 	struct stat str;
@@ -29,7 +29,7 @@ char *getlocation(char *command)
 
 	while (dire)
 	{
-		temp = malloc(_strlen(dire->dir) + _strlen(command) + 2);
+		temp = malloc(_strlen(dire->dir) + _strlen(commands) + 2);
 
 		if (!temp)
 		{
@@ -40,7 +40,7 @@ char *getlocation(char *command)
 
 		_strcat(temp, "/");
 
-		_strcat(temp, command);
+		_strcat(temp, commands);
 
 		if (stat(temp, &str) == 0)
 		{
@@ -58,26 +58,25 @@ char *getlocation(char *command)
 }
 
 /**
- * fill_path_dir - Copies path but also replaces leading/sandwiched/trailing
- *		   colons (:) with current working directory.
- * @path: The colon-separated list of directories.
+ * fillpath_dir - func to Copies path but also replaces leading/sandwiched/
+ * @paths: The colon-separated list of directories.
  *
  * Return: A copy of path with any leading/sandwiched/trailing colons replaced
- *	   with the current working directory.
  */
-char *fill_path_dir(char *path)
+
+char *fillpath_dir(char *paths)
 {
 	int x;
 	int le = 0;
-	char *path_copy, *pwd;
+	char *path_cpy, *pwd;
 
 	pwd = *(_getenv("PWD")) + 4;
 
-	for (x = 0; path[x]; x++)
+	for (x = 0; paths[x]; x++)
 	{
-		if (path[x] == ':')
+		if (paths[x] == ':')
 		{
-			if (path[x + 1] == ':' || x == 0 || path[x + 1] == '\0')
+			if (paths[x + 1] == ':' || x == 0 || paths[x + 1] == '\0')
 			{
 				le += _strlen(pwd) + 1;
 			}
@@ -92,58 +91,58 @@ char *fill_path_dir(char *path)
 		}
 	}
 
-	path_copy = malloc(sizeof(char) * (le + 1));
+	path_cpy = malloc(sizeof(char) * (le + 1));
 
-	if (!path_copy)
+	if (!path_cpy)
 	{
 		return (NULL);
 	}
 
-	path_copy[0] = '\0';
+	path_cpy[0] = '\0';
 
-	for (x = 0; path[x]; x++)
+	for (x = 0; paths[x]; x++)
 	{
-		if (path[x] == ':')
+		if (paths[x] == ':')
 		{
 			if (x == 0)
 			{
-				_strcat(path_copy, pwd);
-				_strcat(path_copy, ":");
+				_strcat(path_cpy, pwd);
+				_strcat(path_cpy, ":");
 			}
-			else if (path[x + 1] == ':' || path[x + 1] == '\0')
+			else if (paths[x + 1] == ':' || paths[x + 1] == '\0')
 			{
-				_strcat(path_copy, ":");
+				_strcat(path_cpy, ":");
 
-				_strcat(path_copy, pwd);
+				_strcat(path_cpy, pwd);
 			}
 			else
 			{
-				_strcat(path_copy, ":");
+				_strcat(path_cpy, ":");
 			}
 		}
 		else
 		{
-			_strncat(path_copy, &path[x], 1);
+			_strncat(path_cpy, &paths[x], 1);
 		}
 	}
-	return (path_copy);
+	return (path_cpy);
 }
 
 /**
- * getpath_dir - Tokenizes a colon-separated list of
- *                directories into a list_s linked list.
- * @path: The colon-separated list of directories.
+ * getpath_dir - func to Tokenizes a colon-separated list of
+ * @paths: colon-separated list of directories.
  *
- * Return: A pointer to the initialized linked list.
+ * Return: pointer to the initialized
  */
-list_t *getpath_dir(char *path)
+
+list_t *getpath_dir(char *paths)
 {
 	char **dirs;
 	char *path_cpy;
 	int x;
 	list_t *head = NULL;
 
-	path_cpy = fill_path_dir(path);
+	path_cpy = fillpath_dir(paths);
 
 	if (!path_cpy)
 	{

@@ -7,8 +7,9 @@ void helpall(void);
 void helpalias(void);
 
 /**
- * helpall - Displays all possible builtin shellby commands.
+ * helpall - the Displays all possible builtin shell
  */
+
 void helpall(void)
 {
 	char *mssg = "Shellby\nThese shell commands are defined internally.\n";
@@ -34,8 +35,9 @@ void helpall(void)
 }
 
 /**
- * helpalias - Displays information on the shellby builtin command 'alias'.
+ * helpalias - the Displays information on the shellby builtin command
  */
+
 void helpalias(void)
 {
 	char *mssg = "alias: alias [NAME[='VALUE'] ...]\n\tHandles aliases.\n";
@@ -61,8 +63,9 @@ void helpalias(void)
 }
 
 /**
- * helpcd - Displays information on the shellby builtin command 'cd'.
+ * helpcd - the Displays information on the shellby builtin command
  */
+
 void helpcd(void)
 {
 	char *mssg = "cd: cd [DIRECTORY]\n\tChanges the current directory of the";
@@ -83,8 +86,9 @@ void helpcd(void)
 }
 
 /**
- * helpexit - Displays information on the shellby builtin command 'exit'.
+ * helpexit - the Displays information on the shellby builtin command
  */
+
 void helpexit(void)
 {
 	char *mssg = "exit: exit [STATUS]\n\tExits the shell.\n\n\tThe ";
@@ -100,8 +104,9 @@ void helpexit(void)
 }
 
 /**
- * helphelp - Displays information on the shellby builtin command 'help'.
+ * helphelp - the Displays information on the shellby builtin command
  */
+
 void helphelp(void)
 {
 	char *mssg = "help: help\n\tSee all possible Shellby builtin commands.\n";

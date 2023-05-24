@@ -1,34 +1,34 @@
 #include "shell.h"
 
-char *getargs(char *line, int *exe_ret);
-int callargs(char **args, char **front, int *exe_ret);
+char *getargs(char *lin, int *exret);
+int callargs(char **args, char **main, int *exret);
 
-int runargs(char **args, char **front, int *exe_ret);
-int handleargs(int *exe_ret);
+int runargs(char **args, char **main, int *exret);
+int handleargs(int *exret);
 int checkargs(char **args);
 
 
 /**
- * getargs - Gets a command from standard input.
- * @line: A buffer to store the command.
- * @exe_ret: The return value of the last executed command.
+ * getargs - func to Gets a command from standard input.
+ * @lin: buffer to store the command.
+ * @exret: return value of the last executed command.
  *
- * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the stored command.
+ * Return: if an error occurs
  */
-char *getargs(char *line, int *exe_ret)
+
+char *getargs(char *lin, int *exret)
 {
 	size_t num = 0;
 	ssize_t read;
 	char *prompt = "$ ";
 
 
-	if (line)
+	if (lin)
 	{
-		free(line);
+		free(lin);
 	}
 
-	read = _getline(&line, &num, STDIN_FILENO);
+	read = _getline(&lin, &num, STDIN_FILENO);
 
 	if (read == -1)
 	{
@@ -42,32 +42,34 @@ char *getargs(char *line, int *exe_ret)
 		{
 			write(STDOUT_FILENO, prompt, 2);
 		}
-		return (getargs(line, exe_ret));
+		return (getargs(lin, exret));
 	}
 
-	line[read - 1] = '\0';
-	variablereplacement(&line, exe_ret);
-	handleline(&line, read);
+	lin[read - 1] = '\0';
 
-	return (line);
+	variablereplacement(&lin, exret);
+	handleline(&lin, read);
+
+	return (lin);
 }
 
 /**
- * callargs - Partitions operators from commands and calls them.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
- * @exe_ret: The return value of the parent process' last executed command.
+ * callargs -func to Partitions operators from commands and calls them.
+ * @args: array of arguments.
+ * @main: double pointer to the beginning of args.
+ * @exret: return val of the parent process' last executed command.
  *
- * Return: The return value of the last executed command.
+ * Return: the last executed command.
  */
-int callargs(char **args, char **front, int *exe_ret)
+
+int callargs(char **args, char **main, int *exret)
 {
 	int r;
 	int i;
 
 	if (!args[0])
 	{
-		return (*exe_ret);
+		return (*exret);
 	}
 	for (i = 0; args[i]; i++)
 	{
@@ -77,9 +79,9 @@ int callargs(char **args, char **front, int *exe_ret)
 
 			args[i] = NULL;
 			args = replacealiases(args);
-			r = runargs(args, front, exe_ret);
+			r = runargs(args, main, exret);
 
-			if (*exe_ret != 0)
+			if (*exret != 0)
 			{
 				args = &args[++i];
 				i = 0;
@@ -100,8 +102,9 @@ int callargs(char **args, char **front, int *exe_ret)
 			args[i] = NULL;
 			args = replacealiases(args);
 
-			r = runargs(args, front, exe_ret);
-			if (*exe_ret == 0)
+			r = runargs(args, main, exret);
+
+			if (*exret == 0)
 			{
 				args = &args[++i];
 				i = 0;
@@ -118,39 +121,40 @@ int callargs(char **args, char **front, int *exe_ret)
 	}
 	args = replacealiases(args);
 
-	r = runargs(args, front, exe_ret);
+	r = runargs(args, main, exret);
 	return (r);
 }
 
 /**
- * runargs - Calls the execution of a command.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
- * @exe_ret: The return value of the parent process' last executed command.
+ * runargs - func to Calls the execution of a command.
+ * @args: array of arguments.
+ * @main: double pointer to the beginning of args.
+ * @exret: value of the parent process' last executed command.
  *
  * Return: The return value of the last executed command.
  */
-int runargs(char **args, char **front, int *exe_ret)
+
+int runargs(char **args, char **main, int *exret)
 {
 	int x, r;
 
 
-	int (*builtin)(char **args, char **front);
+	int (*builtin)(char **args, char **main);
 
 	builtin = get_builtin(args[0]);
 
 	if (builtin)
 	{
-		r = builtin(args + 1, front);
+		r = builtin(args + 1, main);
 		if (r != EXIT)
 		{
-			*exe_ret = r;
+			*exret = r;
 		}
 	}
 	else
 	{
-		*exe_ret = execute(args, front);
-		r = *exe_ret;
+		*exret = execute(args, main);
+		r = *exret;
 	}
 
 	hist++;
@@ -164,37 +168,37 @@ int runargs(char **args, char **front, int *exe_ret)
 }
 
 /**
- * handleargs - Gets, calls, and runs the execution of a command.
- * @exe_ret: The return value of the parent process' last executed command.
+ * handleargs - func to Gets, calls, and runs the execution of a command.
+ * @exret: return value of the parent process' last executed command.
  *
- * Return: If an end-of-file is read - END_OF_FILE (-2).
- *         If the input cannot be tokenized - -1.
- *         O/w - The exit value of the last executed command.
+ * Return: an end-of-file is read - END_OF_FILE
  */
-int handleargs(int *exe_ret)
+
+int handleargs(int *exret)
 {
-	char **args, *line = NULL;
+	char **args, *li = NULL;
 	char **f;
 	int x, ret = 0;
 
-	line = getargs(line, exe_ret);
-	if (!line)
+	li = getargs(li, exret);
+	if (!li)
 	{
 		return (END_OF_FILE);
 	}
 
-	args = _strtok(line, " ");
-	free(line);
+	args = _strtok(li, " ");
+	free(li);
+
 	if (!args)
 	{
 		return (ret);
 	}
 	if (checkargs(args) != 0)
 	{
-		*exe_ret = 2;
+		*exret = 2;
 
 		freeargs(args, args);
-		return (*exe_ret);
+		return (*exret);
 	}
 
 	f = args;
@@ -206,14 +210,15 @@ int handleargs(int *exe_ret)
 			free(args[x]);
 			args[x] = NULL;
 
-			ret = callargs(args, f, exe_ret);
+			ret = callargs(args, f, exret);
+
 			args = &args[++x];
 			x = 0;
 		}
 	}
 	if (args)
 	{
-		ret = callargs(args, f, exe_ret);
+		ret = callargs(args, f, exret);
 	}
 
 	free(f);
@@ -221,11 +226,10 @@ int handleargs(int *exe_ret)
 }
 
 /**
- * checkargs - Checks if there are any leading ';', ';;', '&&', or '||'.
+ * checkargs - func to Checks if there are any leading
  * @args: 2D pointer to tokenized commands and arguments.
  *
- * Return: If a ';', '&&', or '||' is placed at an invalid position - 2.
- *	   Otherwise - 0.
+ * Return: 0 always
  */
 int checkargs(char **args)
 {
