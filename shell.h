@@ -25,12 +25,12 @@ extern char **environ;
 
 
 /**
- * struct builtin_s - A new struct type defining builtin commands.
- * @name: The name of the builtin command.
- * @f: A function pointer to the builtin command's function.
+ * struct builtin_d - struct type defining builtin commands.
+ * @name: name of the builtin command.
+ * @f: function to pointer to the builtin command's function.
  */
 
-typedef struct builtin
+typedef struct builtin_d
 {
 	char *name;
 	int (*f)(char **argv, char **frov);
@@ -42,25 +42,25 @@ typedef struct builtin
  * @next: A pointer to another struct list_s.
  */
 
-typedef struct list
+typedef struct list_d
 {
 	char *dir;
-	struct list_s *next;
+	struct list_d *next;
 } list_v;
 
 
 /**
- * struct alias_s - A new struct defining aliases.
+ * struct alias_d - A new struct defining aliases.
  * @name: The name of the alias.
  * @value: The value of the alias.
  * @next: A pointer to another struct alias_s.
  */
 
-typedef struct alias
+typedef struct alias_d
 {
 	char *value;
 	char *name;
-	struct alias_s *next;
+	struct alias_d *next;
 } alias_v;
 
 /* Global aliases linked list */
