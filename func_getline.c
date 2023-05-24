@@ -171,7 +171,7 @@ ssize_t _getline(char **lptr, size_t *num, FILE *stream)
 
 	buf[input] = '\0';
 
-	assign_lineptr(lptr, num, buf, input);
+	assig_linptr(lptr, num, buf, input);
 
 	rt = input;
 

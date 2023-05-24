@@ -1,118 +1,123 @@
 #include "shell.h"
 
 
-int execute(char **args, char **front);
-void sig_handler(int sig);
+int execute(char **args, char **main);
+void do_handler(int x);
 
 /**
- * sig_handler - Prints a new prompt upon a signal.
- * @sig: The signal.
+ * execute - func to Executes a command in a child process.
+ * @args: array of arguments.
+ * @main: A double pointer to the beginning of args.
+ *
+ * Return: if an error occurs - a corresponding error code.
  */
-void sig_handler(int sig)
+
+int execute(char **args, char **main)
+{
+
+	int sts;
+	int fg = 0, r = 0;
+
+	pid_t ch_pid;
+
+	char *order = args[0];
+
+	if (order[0] != '/' && order[0] != '.')
+	{
+		fg = 1;
+
+		order = getlocation(order);
+	}
+
+	if (!order || (access(order, F_OK) == -1))
+	{
+		if (errno == EACCES)
+		{
+			r = (createerror(args, 126));
+		}
+		else
+		{
+			r = (createerror(args, 127));
+		}
+	}
+	else
+	{
+		ch_pid = fork();
+
+		if (ch_pid == -1)
+		{
+			if (fg)
+			{
+				free(order);
+			}
+
+			perror("Error child:");
+			return (1);
+		}
+		if (ch_pid == 0)
+		{
+			execve(order, args, environ);
+
+			if (errno == EACCES)
+			{
+				r = (createerror(args, 126));
+			}
+
+			free_enve();
+			freeargs(args, main);
+
+			freealias_list(aliases);
+			_exit(r);
+		}
+		else
+		{
+			wait(&sts);
+			r = WEXITSTATUS(sts);
+		}
+	}
+	if (fg)
+	{
+		free(order);
+	}
+	return (r);
+}
+
+/**
+ * do_handler - func to Prints a new prompt upon a signal.
+ * @x: signal.
+ */
+
+void do_handler(int x)
 {
 	char *new_pro = "\n$ ";
 
-	(void)sig;
+	(void)x;
 
-	signal(SIGINT, sig_handler);
+	signal(SIGINT, do_handler);
 
 	write(STDIN_FILENO, new_pro, 3);
 }
 
 /**
- * execute - Executes a command in a child process.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * main - func to runs a simple UNIX command interpreter.
+ * @argc: nums of arguments supplied to the program.
+ * @argv: pointers to the arguments.
  *
- * Return: If an error occurs - a corresponding error code.
- *         O/w - The exit value of the last executed command.
+ * Return: 0 Always.
  */
-int execute(char **args, char **front)
-{
 
-int status;
-int fg = 0, r = 0;
-pid_t child_pid;
-char *command = args[0];
-
-if (command[0] != '/' && command[0] != '.')
-{
-	fg = 1;
-
-	command = getlocation(command);
-}
-
-if (!command || (access(command, F_OK) == -1))
-{
-	if (errno == EACCES)
-	{
-		r = (createerror(args, 126));
-	}
-	else
-	{
-		r = (createerror(args, 127));
-	}
-}
-else
-{
-	child_pid = fork();
-
-	if (child_pid == -1)
-	{
-		if (fg)
-		{
-			free(command);
-		}
-
-		perror("Error child:");
-		return (1);
-	}
-	if (child_pid == 0)
-	{
-		execve(command, args, environ);
-
-		if (errno == EACCES)
-		{
-			r = (createerror(args, 126));
-		}
-
-		free_enve();
-		freeargs(args, front);
-		freealias_list(aliases);
-		_exit(r);
-	}
-	else
-	{
-		wait(&status);
-		r = WEXITSTATUS(status);
-	}
-}
-if (fg)
-{
-	free(command);
-}
-return (r);
-}
-
-/**
- * main - Runs a simple UNIX command interpreter.
- * @argc: The number of arguments supplied to the program.
- * @argv: An array of pointers to the arguments.
- *
- * Return: The return value of the last executed command.
- */
 int main(int argc, char *argv[])
 {
 	int r = 0, ret;
-	int *exe_ret = &ret;
+	int *exret = &ret;
 	char *prompt = "$ ", *newline = "\n";
 
 	name = argv[0];
 	hist = 1;
 	aliases = NULL;
-	signal(SIGINT, sig_handler);
+	signal(SIGINT, do_handler);
 
-	*exe_ret = 0;
+	*exret = 0;
 	environ = _copyenve();
 	if (!environ)
 	{
@@ -121,30 +126,34 @@ int main(int argc, char *argv[])
 
 	if (argc != 1)
 	{
-		r = procfile_commands(argv[1], exe_ret);
+		r = procfile_commands(argv[1], exret);
 
 		free_enve();
+
 		freealias_list(aliases);
-		return (*exe_ret);
+		return (*exret);
 	}
 
 	if (!isatty(STDIN_FILENO))
 	{
 		while (r != END_OF_FILE && r != EXIT)
 		{
-			r = handleargs(exe_ret);
+			r = handleargs(exret);
 		}
 		free_enve();
+
 		freealias_list(aliases);
 
-		return (*exe_ret);
+		return (*exret);
 	}
 
 	while (1)
 	{
+
 		write(STDOUT_FILENO, prompt, 2);
 
-		r = handleargs(exe_ret);
+		r = handleargs(exret);
+
 		if (r == END_OF_FILE || r == EXIT)
 		{
 			if (r == END_OF_FILE)
@@ -154,11 +163,12 @@ int main(int argc, char *argv[])
 
 			free_enve();
 			freealias_list(aliases);
-			exit(*exe_ret);
+
+			exit(*exret);
 		}
 	}
 
 	free_enve();
 	freealias_list(aliases);
-	return (*exe_ret);
+	return (*exret);
 }
